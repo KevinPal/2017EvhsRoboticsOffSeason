@@ -26,16 +26,16 @@ public class DriveSquare extends CommandGroup {
         // arm.
     	
     	
-    	addSequential(new DriveForward(2));
+    	addSequential(new DriveForwardTime(2));
     	addSequential(new TurnToAngle(90));
     	
-    	addSequential(new DriveForward(2));
+    	addSequential(new DriveForwardTime(2));
     	addSequential(new TurnToAngle(90));
     	
-    	addSequential(new DriveForward(2));
+    	addSequential(new DriveForwardTime(2));
     	addSequential(new TurnToAngle(90));
     	
-    	addSequential(new DriveForward(2));
+    	addSequential(new DriveForwardTime(2));
     	addSequential(new TurnToAngle(90));
     	
     	

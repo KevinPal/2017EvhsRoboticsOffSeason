@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class DriveForward extends TimedCommand {
+public class DriveForwardTime extends TimedCommand {
 
 	private DriveTrain driveTrain;
 	
-    public DriveForward(double timeout) {
+    public DriveForwardTime(double timeout) {
         super(timeout);
         requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
     }

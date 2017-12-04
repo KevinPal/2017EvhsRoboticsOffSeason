@@ -35,8 +35,8 @@ public class Robot extends IterativeRobot {
 	 * for any initialization code.
 	 */
 
-	static HashMap<Subsystems, Subsystem> subsystems = new HashMap<Subsystems, Subsystem>();
 	public static AHRS ahrs;
+	static HashMap<Subsystems, Subsystem> subsystems = new HashMap<Subsystems, Subsystem>();
 	private static double fieldWidth;// TODO decide the unit of this
 	private static double fieldHeight;// TODO decide the unit of this
 	private static double startingX = 0;
@@ -45,7 +45,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		ahrs = new AHRS(SerialPort.Port.kMXP);
-		fm = new FieldMap(fieldWidth, fieldHeight, startingX, startingY);
+
+		fm = new FieldMap(fieldWidth, fieldHeight);
+		fm.setRobotPosition(startingX, startingY);
+		fm.setTargetPosition(startingX, startingY, false);
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		subsystems.put(Subsystems.DRIVE_TRAIN, new DriveTrain());
