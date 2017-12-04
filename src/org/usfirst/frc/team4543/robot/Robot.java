@@ -3,7 +3,6 @@ package org.usfirst.frc.team4543.robot;
 
 import java.util.HashMap;
 
-import org.usfirst.frc.team4543.robot.commands.DriveSquare;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
 import org.usfirst.team4543.map.FieldMap;
 
@@ -12,11 +11,13 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import src.org.org.usfirst.frc.team4543.robot.commands.map.UpdateRobotPositionEncoder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
+	Command urpe;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	public static FieldMap fm;
 	/**
@@ -112,6 +114,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		urpe = new UpdateRobotPositionEncoder();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
@@ -119,11 +122,15 @@ public class Robot extends IterativeRobot {
 	/**
 	 * This function is called periodically during operator control
 	 */
+	private class Periodic extends CommandGroup {
+		public Periodic() {
+			addParallel(new UpdateRobotPositionEncoder());
+		}
+	}
+
 	@Override
 	public void teleopPeriodic() {
-
-		OI.buttonA.whenPressed(new DriveSquare());
-
+		Scheduler.getInstance().add(new Periodic());
 		Scheduler.getInstance().run();
 	}
 

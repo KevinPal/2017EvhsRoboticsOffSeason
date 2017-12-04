@@ -15,6 +15,7 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
+	private int leftT1Zero, leftT2Zero, rightT1Zero, rightT2Zero;
 
 	public void initDefaultCommand() {
 	}
@@ -40,12 +41,27 @@ public class DriveTrain extends Subsystem {
 		rightT1.set(right);
 		rightT2.set(right);
 	}
- 
+
 	public void stop() {
 		leftT1.set(0);
 		leftT2.set(0);
 		rightT1.set(0);
 		rightT2.set(0);
+	}
+
+	public void zeroEncoders() {
+		leftT1Zero = leftT1.getEncPosition();
+		leftT2Zero = leftT2.getEncPosition();
+		rightT1Zero = rightT1.getEncPosition();
+		rightT2Zero = rightT2.getEncPosition();
+	}
+
+	public int getLeftEncoder() {
+		return (int) Math.round(((leftT1.getEncPosition() - leftT1Zero) + (leftT2.getEncPosition() - leftT2Zero)) / 2);
+	}
+
+	public int getRightEncoder() {
+		return (int) Math.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
 	}
 
 }

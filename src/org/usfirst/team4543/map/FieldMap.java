@@ -21,20 +21,18 @@ public class FieldMap extends Subsystem {
 
 		@Override
 		public double getWidth() {
-			// TODO Auto-generated method stub
-			return 0;
+			return width;
 		}
 
 		@Override
 		public double getHeight() {
-			// TODO Auto-generated method stub
-			return 0;
+			return height;
 		}
 
 		@Override
 		public void setSize(double width, double height) {
-			// TODO Auto-generated method stub
-
+			this.width = width;
+			this.height = height;
 		}
 
 	}
@@ -55,13 +53,11 @@ public class FieldMap extends Subsystem {
 
 		@Override
 		public double getX() {
-			// TODO Auto-generated method stub
 			return x;
 		}
 
 		@Override
 		public double getY() {
-			// TODO Auto-generated method stub
 			return y;
 		}
 
@@ -129,9 +125,9 @@ public class FieldMap extends Subsystem {
 	}
 
 	public boolean setTargetPosition(double x, double y, boolean force) {
-		System.out.println((x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight())
+		System.out.print((x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight())
 				? ("Warning: The targetPosition is out of the field boundaries"
-						+ ((force) ? ", \n\tProceeding anyways" : ""))
+						+ ((force) ? ", \n\tProceeding anyways\n" : ""))
 				: "");
 		if (((x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight()) && force)
 				|| !(x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight())) {

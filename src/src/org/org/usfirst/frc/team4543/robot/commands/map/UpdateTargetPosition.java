@@ -17,8 +17,8 @@ public class UpdateTargetPosition extends Command {
 
 	@Override
 	protected void execute() {
-		FieldMap fm = (FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP);
-		fm.setTargetPosition(x, y, false);
+		System.out.print((((FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP)).setTargetPosition(x, y, false)) ? ""
+				: "Updating targetPosition has failed\n");
 	}
 
 	@Override
