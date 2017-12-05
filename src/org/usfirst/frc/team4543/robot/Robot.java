@@ -39,8 +39,8 @@ public class Robot extends IterativeRobot {
 
 	public static AHRS ahrs;
 	static HashMap<Subsystems, Subsystem> subsystems = new HashMap<Subsystems, Subsystem>();
-	private static double fieldWidth;// TODO decide the unit of this
-	private static double fieldHeight;// TODO decide the unit of this
+	private static double fieldWidth;// TODO decide the unit of this, looks like inches
+	private static double fieldHeight;// TODO decide the unit of this looks like inches
 	private static double startingX = 0;
 	private static double startingY = 0;
 
