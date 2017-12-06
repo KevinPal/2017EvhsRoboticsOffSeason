@@ -24,7 +24,7 @@ public class UpdateRobotPositionEncoder extends Command {
 
 		fm.setRobotPosition(fm.getX() + dt.getLeftEncoder() * (Timer.getFPGATimestamp() - timeStamp),
 				fm.getY() + dt.getRightEncoder() * (Timer.getFPGATimestamp() - timeStamp));
-
+		//TODO This is an approximation, make maths that assume no slipping
 		dt.zeroEncoders();
 		timeStamp = Timer.getFPGATimestamp();
 	}
