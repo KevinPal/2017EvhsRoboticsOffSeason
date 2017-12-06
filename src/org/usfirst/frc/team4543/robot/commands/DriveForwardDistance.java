@@ -28,7 +28,7 @@ public class DriveForwardDistance extends Command {
 	@Override
 	protected void end() {
 		// TODO Find a way to report the error in the encoders
-		double errorTheta = (dt.getRightEncoder() - dt.getLeftEncoder()) / dt.getWidth;
+		double errorTheta = (dt.getRightEncoder() - dt.getLeftEncoder()) / dt.getWidth();
 	}
 
 }
