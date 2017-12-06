@@ -16,6 +16,8 @@ public class DriveTrain extends Subsystem {
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
 	private int leftT1Zero, leftT2Zero, rightT1Zero, rightT2Zero;
+	// TODO put dimensions of the drivetrain in here
+	private final double width;
 
 	public void initDefaultCommand() {
 	}
@@ -61,7 +63,11 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public int getRightEncoder() {
-		return (int) Math.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
+		return (int) Math
+				.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
 	}
 
+	public int getWidth() {
+		return width;
+	}
 }
