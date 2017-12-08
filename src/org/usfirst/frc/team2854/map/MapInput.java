@@ -4,10 +4,11 @@ public interface MapInput {
 
 	public double getDeltaForward();
 	
-	public double getError();
+	public double getPosError();
 	
 	public double getRotation();
 	
 	public void update();
 	
 }
+ 

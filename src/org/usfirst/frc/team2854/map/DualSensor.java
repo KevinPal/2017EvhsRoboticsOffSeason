@@ -47,5 +47,9 @@ public class DualSensor {
 	public double calculateValue(double measurement1, double measurement2) {
 		return combinedVariance * (measurement1/variance1 + measurement2/variance2);
 	}
+
+	public double getError() {
+		return Math.sqrt(combinedVariance);
+	}
 	
 }

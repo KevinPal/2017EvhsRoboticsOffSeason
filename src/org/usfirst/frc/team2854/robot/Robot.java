@@ -3,6 +3,8 @@ package org.usfirst.frc.team2854.robot;
 
 import java.util.HashMap;
 
+import org.usfirst.frc.team2854.map.AccelerometerBased;
+import org.usfirst.frc.team2854.map.FieldMap;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -27,6 +29,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	private static HashMap<SubsystemNames, Subsystem> subsystems;
+	private static SensorBoard sensors;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -37,7 +40,11 @@ public class Robot extends IterativeRobot {
 		subsystems = new HashMap<SubsystemNames, Subsystem>();
 		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		sensors = new SensorBoard();
 		SmartDashboard.putData("Auto mode", chooser);
+		AccelerometerBased mapInput = new AccelerometerBased();
+		FieldMap map = new FieldMap( 396, 304, 300, 300, mapInput);
+		
 	}
 
 	/**
@@ -118,5 +125,9 @@ public class Robot extends IterativeRobot {
 
 	public static Subsystem getSubsystem(SubsystemNames name) {
 		return subsystems.get(name);
+	}
+
+	public static SensorBoard getSensors() {
+		return sensors;
 	}
 }

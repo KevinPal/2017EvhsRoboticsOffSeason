@@ -36,6 +36,14 @@ public class SensorBoard {
 		forwardAccel.calibrate();
 	}
 
+	public double getGyroValue() {
+		return gyro.calculateValue(spiGyro.getRate(), navX.getRate());
+	}
+
+	public double getForwardAccelValue() {
+		return forwardAccel.calculateValue(accelerometer.getX(), navX.getRawAccelX());
+	}
+
 	public DualSensor getGyro() {
 		return gyro;
 	}

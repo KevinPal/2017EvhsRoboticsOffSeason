@@ -18,6 +18,7 @@ public class FieldMap implements Runnable{
 	public volatile boolean shouldRun = true;
 	
 	
+	
 	public FieldMap(int fWidth, int fHeight, int sWidth, int sHeight, MapInput robotInput) {
 		this.fWidth = fWidth;
 		this.fHeight = fHeight;
@@ -40,15 +41,24 @@ public class FieldMap implements Runnable{
 		while(shouldRun) {
 			startTime = System.nanoTime();
 			deltaTime = (startTime - lastTime)/1E9d;
+			robotInput.update();
 			Mat screen = new Mat(sHeight, sWidth, CvType.CV_8UC1);
 			Imgproc.cvtColor(screen, screen, Imgproc.COLOR_RGB2GRAY);
-			//clear white
+			robotPos.add(robotInput.getDeltaForward() * Math.cos(robotInput.getRotation()), robotInput.getDeltaForward() * Math.sin(robotInput.getRotation()));
+			Vector screenPos = new Vector(((robotPos.getX()/(double)(fWidth)*2)-1)*sWidth/2d + sWidth/2d,
+										((robotPos.getY()/(double)(fHeight)*2)-1)*sHeight/2d + sHeight/2d);
 			for(int i = 0; i < sWidth; i++) {
 				for(int j = 0; j < sHeight; j++) {
-					screen.put(j, i, new byte[] {(byte) 0xff});
+					if(i == (int)screenPos.getX() && j == (int)screenPos.getY()) {
+						screen.put(j, i, new byte[] {(byte) 0x00});
+					} else {
+						screen.put(j, i, new byte[] {(byte) 0xff});
+					}
+
 				}
 			}
 			
+			output.putFrame(screen);
 			lastTime = startTime;
 		}
 	}

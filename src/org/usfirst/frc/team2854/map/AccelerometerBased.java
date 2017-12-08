@@ -1,29 +1,44 @@
 package org.usfirst.frc.team2854.map;
 
+import org.usfirst.frc.team2854.robot.Robot;
+import org.usfirst.frc.team2854.robot.SensorBoard;
+
 public class AccelerometerBased implements MapInput {
 
+	private SensorBoard sensors;
+	private long startTime = 0, lastTime = 0;
+	private double deltaTime = 0;
+	
+	private double velocity;
+	
+	
+	public AccelerometerBased() {
+		sensors = Robot.getSensors();
+	} 
+	
 	@Override
 	public double getDeltaForward() {
-		// TODO Auto-generated method stub
-		return 0;
+		return velocity * deltaTime;
 	}
 
 	@Override
-	public double getError() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getPosError() {
+		return Math.pow(sensors.getForwardAccel().getError(), 3);
 	}
 
 	@Override
 	public double getRotation() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sensors.getGyroValue();
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		startTime = System.nanoTime();
+		deltaTime = (startTime - lastTime)/1E9d;
 		
+		velocity += sensors.getForwardAccelValue() * deltaTime;
+	
+		lastTime = startTime;
 	}
 
 }
