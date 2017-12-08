@@ -42,6 +42,11 @@ public class Vector {
 	public void setY(double y) {
 		this.y = y;
 	}
+
+	@Override
+	public String toString() {
+		return "Vector [x=" + x + ", y=" + y + "]";
+	}
 	
 	
 }

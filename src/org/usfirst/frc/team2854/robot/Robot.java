@@ -38,12 +38,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		subsystems = new HashMap<SubsystemNames, Subsystem>();
-		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		sensors = new SensorBoard();
+		//subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 		SmartDashboard.putData("Auto mode", chooser);
+		sensors = new SensorBoard();
+		sensors.calibrate((long) 2E9);
+
 		AccelerometerBased mapInput = new AccelerometerBased();
-		FieldMap map = new FieldMap( 396, 304, 300, 300, mapInput);
+		FieldMap map = new FieldMap( 396, 304, 250, 250, mapInput);
 		
 	}
 
