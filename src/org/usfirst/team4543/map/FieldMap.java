@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FieldMap extends Subsystem {
 	private RobotPosition rPos;
+	private RobotAngle rAngle;
 	private RobotPosition targetPos;
+	private RobotAngle targetAngle;
 	private Field f;
 
 	private class Field extends Dimension2D {
@@ -69,15 +71,42 @@ public class FieldMap extends Subsystem {
 
 	}
 
+	private class RobotAngle {
+		private double angle;
+
+		public RobotAngle() {
+			angle = 0;
+		}
+
+		public RobotAngle(double angle) {
+			this.angle = angle;
+		}
+
+		public void setAngle(double angle) {
+			this.angle = angle;
+		}
+
+		public double getAngle() {
+			return angle;
+		}
+
+		public Object clone() {
+			return this.clone();
+		}
+	}
+
 	public FieldMap(double width, double height) {
 		f = new Field(width, height);
 		rPos = new RobotPosition();
 		targetPos = new RobotPosition();
+		rAngle = new RobotAngle();
+		targetAngle = new RobotAngle();
 	}
 
-	public FieldMap(Field f, RobotPosition rPos) {
+	public FieldMap(Field f, RobotPosition rPos, RobotAngle rAngle) {
 		this.f = (Field) f.clone();
 		this.rPos = (RobotPosition) rPos.clone();
+		this.rAngle = (RobotAngle) rAngle.clone();
 	}
 
 	public Field getField() {
