@@ -16,6 +16,12 @@ class Field extends Dimension2D {
 		height = 10;
 	}
 
+	public boolean isWithinBounds(RobotPosition rp) {
+		double x = rp.getX();
+		double y = rp.getY();
+		return !(x < 0 || y < 0 || x > getWidth() || y > getHeight());
+	}
+
 	@Override
 	public double getWidth() {
 		return width;

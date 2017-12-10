@@ -41,17 +41,13 @@ public class FieldMap extends Subsystem {
 	}
 
 	public boolean setTargetPosition(double x, double y, boolean force) {
-		System.out.print((x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight())
+		RobotPosition check = new RobotPosition(x, y);
+		System.out.print(f.isWithinBounds(new RobotPosition(x, y))
 				? ("Warning: The targetPosition is out of the field boundaries"
 						+ ((force) ? ", \n\tProceeding anyways\n" : ""))
 				: "");
-		if (((x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight()) && force)
-				|| !(x < 0 || y < 0 || x > f.getWidth() || y > f.getHeight())) {
-			if (targetPos.equals(null)) {
-				targetPos = new RobotPosition(x, y);
-			} else {
-				targetPos.setLocation(x, y);
-			}
+		if ((!f.isWithinBounds(check) && force) || f.isWithinBounds(check)) {
+			targetPos = check;
 			return true;
 		}
 		return false;
@@ -70,7 +66,7 @@ public class FieldMap extends Subsystem {
 	}
 
 	public void setField(Field f) {
-
+		this.f = f;
 	}
 
 	@Override
