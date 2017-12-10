@@ -3,6 +3,7 @@ package org.usfirst.frc.team4543.robot;
 
 import java.util.HashMap;
 
+import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotPositionEncoder;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
 import org.usfirst.team4543.map.FieldMap;
 
@@ -17,7 +18,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import src.org.org.usfirst.frc.team4543.robot.commands.map.UpdateRobotPositionEncoder;
 
 /**
  * The VM is configured to automatically run this class, and to call the

@@ -137,6 +137,10 @@ public class FieldMap extends Subsystem {
 		return rPos.getY();
 	}
 
+	public double getTheta() {
+		return rAngle.getAngle();
+	}
+
 	public double getTargetX() {
 		return targetPos.getX();
 	}
@@ -145,12 +149,20 @@ public class FieldMap extends Subsystem {
 		return targetPos.getY();
 	}
 
+	public double getTargetTheta() {
+		return targetAngle.getAngle();
+	}
+
 	public void setRobotPosition(double x, double y) {
 		if (rPos.equals(null)) {
 			rPos = new RobotPosition(x, y);
 		} else {
 			rPos.setLocation(x, y);
 		}
+	}
+
+	public void setRobotAngle(double angle) {
+		rAngle.setAngle(angle);
 	}
 
 	public boolean setTargetPosition(double x, double y, boolean force) {
@@ -168,6 +180,10 @@ public class FieldMap extends Subsystem {
 			return true;
 		}
 		return false;
+	}
+
+	public void setTargetAngle(double angle) {
+		targetAngle.setAngle(angle);
 	}
 
 	public void setField(double width, double height) {

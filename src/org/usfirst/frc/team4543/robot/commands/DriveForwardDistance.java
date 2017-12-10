@@ -4,6 +4,8 @@ import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.Subsystems;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class DriveForwardDistance extends Command {
 
 	private double distance;
@@ -15,7 +17,7 @@ public class DriveForwardDistance extends Command {
 		requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 		this.distance = distance;
-		dt = Robot.getSubSystem(Subsystems.DRIVE_TRAIN);
+		dt = (DriveTrain) Robot.getSubSystem(Subsystems.DRIVE_TRAIN);
 		zeroLeft = dt.getLeftEncoder();
 		zeroRight = dt.getRightEncoder();
 	}

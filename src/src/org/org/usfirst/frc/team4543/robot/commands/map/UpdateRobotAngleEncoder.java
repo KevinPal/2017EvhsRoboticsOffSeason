@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4543.robot.commands.map;
+package src.org.org.usfirst.frc.team4543.robot.commands.map;
 
 import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.Subsystems;
@@ -8,10 +8,10 @@ import org.usfirst.team4543.map.FieldMap;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UpdateRobotPositionEncoder extends Command {
+public class UpdateRobotAngleEncoder extends Command {
 	private double timeStamp;
 
-	public UpdateRobotPositionEncoder() {
+	public UpdateRobotAngleEncoder() {
 		timeStamp = Timer.getFPGATimestamp();
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 		requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
@@ -23,7 +23,7 @@ public class UpdateRobotPositionEncoder extends Command {
 		DriveTrain dt = (DriveTrain) Robot.getSubSystem(Subsystems.DOOR);
 
 		fm.setRobotPosition(fm.getX() + dt.getLeftEncoder(), fm.getY() + dt.getRightEncoder());
-		// TODO This is an approximation, make maths that assume no slipping
+
 		dt.zeroEncoders();
 		timeStamp = Timer.getFPGATimestamp();
 	}

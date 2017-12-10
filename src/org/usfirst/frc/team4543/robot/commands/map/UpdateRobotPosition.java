@@ -12,10 +12,12 @@ public class UpdateRobotPosition extends Command {
 	public UpdateRobotPosition(double x, double y) {
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 	}
+
 	@Override
-	protected boolean execute(){
-		
+	protected void execute() {
+
 	}
+
 	@Override
 	protected boolean isFinished() {
 		return true;

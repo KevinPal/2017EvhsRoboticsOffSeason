@@ -35,6 +35,8 @@ public class DriveTrain extends Subsystem {
 		rightT2 = new CANTalon(RobotMap.rightTalonID2);
 		rightT2.setInverted(false);
 
+		width = 100; // TODO put something here
+
 	}
 
 	public void drive(double left, double right) {
@@ -67,7 +69,7 @@ public class DriveTrain extends Subsystem {
 				.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
 	}
 
-	public int getWidth() {
+	public double getWidth() {
 		return width;
 	}
 }
