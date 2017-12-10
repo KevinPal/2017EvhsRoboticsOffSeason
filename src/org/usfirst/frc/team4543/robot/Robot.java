@@ -3,6 +3,7 @@ package org.usfirst.frc.team4543.robot;
 
 import java.util.HashMap;
 
+import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotAngleAndRobotPositionEncoder;
 import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotPositionEncoder;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
 import org.usfirst.team4543.map.FieldMap;
@@ -124,7 +125,7 @@ public class Robot extends IterativeRobot {
 	 */
 	private class Periodic extends CommandGroup {
 		public Periodic() {
-			addParallel(new UpdateRobotPositionEncoder());
+			addParallel(new UpdateRobotAngleAndRobotPositionEncoder());
 		}
 	}
 

@@ -16,7 +16,6 @@ public class DriveTrain extends Subsystem {
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
 	private int leftT1Zero, leftT2Zero, rightT1Zero, rightT2Zero;
-	// TODO put dimensions of the drivetrain in here
 	private final double width;
 
 	public void initDefaultCommand() {
@@ -35,7 +34,8 @@ public class DriveTrain extends Subsystem {
 		rightT2 = new CANTalon(RobotMap.rightTalonID2);
 		rightT2.setInverted(false);
 
-		width = 100; // TODO put something here
+		width = 100;
+		// TODO put dimensions of the drivetrain in here
 
 	}
 

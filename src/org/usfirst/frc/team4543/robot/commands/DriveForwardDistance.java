@@ -10,16 +10,20 @@ public class DriveForwardDistance extends Command {
 
 	private double distance;
 	private DriveTrain dt;
-	private double zeroLeft;
-	private double zeroRight;
+	private double power;
 
-	public DriveForwardDistance(double distance) {
+	public DriveForwardDistance(double distance, double power) {
 		requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 		this.distance = distance;
 		dt = (DriveTrain) Robot.getSubSystem(Subsystems.DRIVE_TRAIN);
-		zeroLeft = dt.getLeftEncoder();
-		zeroRight = dt.getRightEncoder();
+		dt.zeroEncoders();
+		this.power = power;
+	}
+
+	@Override
+	protected void execute() {
+		dt.drive(power, power);
 	}
 
 	@Override

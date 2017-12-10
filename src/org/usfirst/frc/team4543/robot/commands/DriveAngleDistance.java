@@ -5,6 +5,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveAngleDistance extends CommandGroup {
 	public DriveAngleDistance(double distance, double angle) {
 		addSequential(new TurnToAngle(angle));
-		addSequential(new DriveForwardDistance(distance));
+		addSequential(new DriveForwardDistance(distance, 0.1));
 	}
 }

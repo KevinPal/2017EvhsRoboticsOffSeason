@@ -26,11 +26,9 @@ public class UpdateRobotPositionEncoder extends Command {
 		try {
 			double r = Math.abs((dt.getWidth() / (right - left)) * (right + left) / 2);
 			double theta = (right + left) / 2;
-			fm.setRobotAngle(fm.getTheta() + (right + left) / (2 + r));
 			fm.setRobotPosition(fm.getX() + (r + dt.getWidth()) / 2 * Math.cos(theta),
 					fm.getY() + (r + dt.getWidth()) / 2 * Math.sin(theta));
 		} catch (ArithmeticException e) {
-			fm.setRobotAngle(fm.getTheta());
 			double distance = (left + right) / 2;
 			fm.setRobotPosition(fm.getX() + distance * Math.cos(fm.getTheta()),
 					fm.getY() + distance * Math.sin(fm.getTheta()));
