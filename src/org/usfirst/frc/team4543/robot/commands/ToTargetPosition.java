@@ -21,16 +21,18 @@ public class ToTargetPosition extends Command {
 
 	@Override
 	protected void execute() {
-		double distance = Math
-				.sqrt(Math.pow(fm.getTargetX() - fm.getX(), 2) + Math.pow(fm.getTargetX() - fm.getY(), 2));
-		double angle = Math.atan((fm.getY() - fm.getTargetY()) / (fm.getX() - fm.getTargetX()));
+		double distance = Math.sqrt(Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getX(), 2)
+				+ Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getY(), 2));
+		double angle = Math.atan((fm.getRobotPosition().getY() - fm.getTargetPosition().getY())
+				/ (fm.getRobotPosition().getX() - fm.getTargetPosition().getX()));
 		Scheduler.getInstance().add(new DriveAngleDistance(angle, distance));
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return ((Math.pow(fm.getTargetX() - fm.getX(), 2)
-				+ Math.pow(fm.getTargetX() - fm.getY(), 2)) < distanceThreshold * distanceThreshold);
+		return ((Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getX(), 2)
+				+ Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getY(), 2)) < distanceThreshold
+						* distanceThreshold);
 	}
 
 	@Override

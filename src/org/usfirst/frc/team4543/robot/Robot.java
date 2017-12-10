@@ -4,7 +4,6 @@ package org.usfirst.frc.team4543.robot;
 import java.util.HashMap;
 
 import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotAngleAndRobotPositionEncoder;
-import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotPositionEncoder;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
 import org.usfirst.team4543.map.FieldMap;
 
@@ -30,7 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	Command urpe;
+	Command uraarpe;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	public static FieldMap fm;
 	/**
@@ -115,7 +114,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		urpe = new UpdateRobotPositionEncoder();
+		uraarpe = new UpdateRobotAngleAndRobotPositionEncoder();
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
@@ -125,7 +124,7 @@ public class Robot extends IterativeRobot {
 	 */
 	private class Periodic extends CommandGroup {
 		public Periodic() {
-			addParallel(new UpdateRobotAngleAndRobotPositionEncoder());
+			addParallel(uraarpe);
 		}
 	}
 

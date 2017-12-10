@@ -35,7 +35,7 @@ public class ToTargetAngle extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (fm.getTargetTheta() - fm.getTheta()) < targetThreshold;
+		return (fm.getTargetPosition().getTheta() - fm.getRobotPosition().getTheta()) < targetThreshold;
 	}
 
 }

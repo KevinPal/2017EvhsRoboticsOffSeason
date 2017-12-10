@@ -28,14 +28,14 @@ public class UpdateRobotAngleAndRobotPositionEncoder extends Command {
 		try {
 			double r = Math.abs((dt.getWidth() / (right - left)) * (right + left) / 2);
 			double theta = (right - left) / 2;
-			fm.setRobotAngle(fm.getTheta() + (right + left) / (2 + r));
-			fm.setRobotPosition(fm.getX() - (r * (1 - Math.cos(theta)) + dt.getWidth() / 2),
-					fm.getY() + (r * Math.sin(theta)));
+			fm.setRobotAngle(fm.getRobotPosition().getTheta() + (right + left) / (2 + r));
+			fm.setRobotPosition(fm.getRobotPosition().getX() - (r * (1 - Math.cos(theta)) + dt.getWidth() / 2),
+					fm.getRobotPosition().getY() + (r * Math.sin(theta)));
 		} catch (ArithmeticException e) {
-			fm.setRobotAngle(fm.getTheta());
+			fm.setRobotAngle(fm.getRobotPosition().getTheta());
 			double distance = (left + right) / 2;
-			fm.setRobotPosition(fm.getX() + distance * Math.cos(fm.getTheta()),
-					fm.getY() + distance * Math.sin(fm.getTheta()));
+			fm.setRobotPosition(fm.getRobotPosition().getX() + distance * Math.cos(fm.getRobotPosition().getTheta()),
+					fm.getRobotPosition().getY() + distance * Math.sin(fm.getRobotPosition().getTheta()));
 		}
 		dt.zeroEncoders();
 		timeStamp = Timer.getFPGATimestamp();
