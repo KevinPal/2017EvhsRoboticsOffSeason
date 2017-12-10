@@ -10,17 +10,19 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class UpdateRobotAngleAndRobotPositionEncoder extends Command {
 	private double timeStamp;// TODO not sure if I'll need this again
+	private FieldMap fm;
+	private DriveTrain dt;
 
 	public UpdateRobotAngleAndRobotPositionEncoder() {
 		timeStamp = Timer.getFPGATimestamp();
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 		requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
+		fm = (FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP);
+		dt = (DriveTrain) Robot.getSubSystem(Subsystems.DOOR);
 	}
 
 	@Override
 	protected void execute() {
-		FieldMap fm = (FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP);
-		DriveTrain dt = (DriveTrain) Robot.getSubSystem(Subsystems.DOOR);
 		double left = dt.getLeftEncoder();
 		double right = dt.getRightEncoder();
 		try {
