@@ -1,4 +1,4 @@
-package src.org.org.usfirst.frc.team4543.robot.commands.map;
+package org.usfirst.frc.team4543.robot.commands.map;
 
 import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.Subsystems;
@@ -8,7 +8,7 @@ import org.usfirst.team4543.map.FieldMap;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UpdateRobotPositionNavX extends Command {
+public class UpdateRobotPositionNavX extends Command {//TODO I think we're screwing this 
 	private double timeStamp;
 
 	public UpdateRobotPositionNavX() {

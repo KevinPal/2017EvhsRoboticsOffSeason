@@ -1,4 +1,4 @@
-package src.org.org.usfirst.frc.team4543.robot.commands.map;
+package org.usfirst.frc.team4543.robot.commands.map;
 
 import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.Subsystems;

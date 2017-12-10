@@ -1,4 +1,4 @@
-package src.org.org.usfirst.frc.team4543.robot.commands.map;
+package org.usfirst.frc.team4543.robot.commands.map;
 
 import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.Subsystems;
@@ -12,7 +12,10 @@ public class UpdateRobotPosition extends Command {
 	public UpdateRobotPosition(double x, double y) {
 		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
 	}
-
+	@Override
+	protected boolean execute(){
+		
+	}
 	@Override
 	protected boolean isFinished() {
 		return true;
