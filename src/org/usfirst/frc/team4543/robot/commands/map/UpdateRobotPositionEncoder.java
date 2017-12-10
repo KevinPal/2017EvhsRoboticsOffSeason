@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class UpdateRobotPositionEncoder extends Command {
-	private double timeStamp;
+	private double timeStamp;// TODO not sure if I'll need this again
 
 	public UpdateRobotPositionEncoder() {
 		timeStamp = Timer.getFPGATimestamp();
@@ -21,9 +21,20 @@ public class UpdateRobotPositionEncoder extends Command {
 	protected void execute() {
 		FieldMap fm = (FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP);
 		DriveTrain dt = (DriveTrain) Robot.getSubSystem(Subsystems.DOOR);
-
-		fm.setRobotPosition(fm.getX() + dt.getLeftEncoder(), fm.getY() + dt.getRightEncoder());
-		// TODO This is an approximation, make maths that assume no slipping
+		double left = dt.getLeftEncoder();
+		double right = dt.getRightEncoder();
+		try {
+			double r = Math.abs((dt.getWidth() / (right - left)) * (right + left) / 2);
+			double theta = (right + left) / 2;
+			fm.setRobotAngle(fm.getTheta() + (right + left) / (2 + r));
+			fm.setRobotPosition(fm.getX() + (r + dt.getWidth()) / 2 * Math.cos(theta),
+					fm.getY() + (r + dt.getWidth()) / 2 * Math.sin(theta));
+		} catch (ArithmeticException e) {
+			fm.setRobotAngle(fm.getTheta());
+			double distance = (left + right) / 2;
+			fm.setRobotPosition(fm.getX() + distance * Math.cos(fm.getTheta()),
+					fm.getY() + distance * Math.sin(fm.getTheta()));
+		}
 		dt.zeroEncoders();
 		timeStamp = Timer.getFPGATimestamp();
 	}
