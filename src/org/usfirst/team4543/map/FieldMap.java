@@ -8,13 +8,11 @@ public class FieldMap extends Subsystem {
 	private RobotPosition rPos;
 	private RobotPosition targetPos;
 	private Field f;
-	private ArrayList<FieldShape> fieldPieces;
 
 	public FieldMap(double width, double height) {
 		f = new Field(width, height);
 		rPos = new RobotPosition();
 		targetPos = new RobotPosition();
-		fieldPieces = new ArrayList<FieldShape>();
 	}
 
 	public Field getField() {
@@ -70,9 +68,6 @@ public class FieldMap extends Subsystem {
 		this.f = f;
 	}
 
-	public void addFieldShape(FieldShape fs) {
-		fieldPieces.add(fs);
-	}
 
 	@Override
 	protected void initDefaultCommand() {
