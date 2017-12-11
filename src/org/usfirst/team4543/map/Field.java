@@ -2,7 +2,7 @@ package org.usfirst.team4543.map;
 
 import java.awt.geom.Dimension2D;
 
-class Field extends Dimension2D {
+class Field extends Dimension2D implements FieldShape{
 	private double width;
 	private double height;
 

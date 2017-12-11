@@ -1,7 +1,6 @@
 package org.usfirst.team4543.map;
 
-import java.awt.geom.Dimension2D;
-import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -9,11 +8,13 @@ public class FieldMap extends Subsystem {
 	private RobotPosition rPos;
 	private RobotPosition targetPos;
 	private Field f;
+	private ArrayList<FieldShape> fieldPieces;
 
 	public FieldMap(double width, double height) {
 		f = new Field(width, height);
 		rPos = new RobotPosition();
 		targetPos = new RobotPosition();
+		fieldPieces = new ArrayList<FieldShape>();
 	}
 
 	public Field getField() {
@@ -67,6 +68,10 @@ public class FieldMap extends Subsystem {
 
 	public void setField(Field f) {
 		this.f = f;
+	}
+
+	public void addFieldShape(FieldShape fs) {
+		fieldPieces.add(fs);
 	}
 
 	@Override
