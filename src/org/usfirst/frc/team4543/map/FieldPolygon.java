@@ -1,16 +1,14 @@
 package org.usfirst.frc.team4543.map;
 
-import java.awt.Polygon;
-import java.util.ArrayList;
-
-public class FieldPolygon extends Polygon implements FieldShape {
+public class FieldPolygon implements FieldShape {
 	public FieldPolygon(double[] x, double[] y, int points) {
-
+		super();
 	}
 
 	@Override
 	public boolean isWithinBounds(RobotPosition rp) {
-		return contains(rp.getX(), rp.getY());
+		// TODO It doesn't seem that the geom package has a Polygon class
+		return true;
 	}
 
 }

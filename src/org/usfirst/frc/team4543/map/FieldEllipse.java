@@ -4,8 +4,11 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do this later,
-	public FieldEllipse(Vector major, Vector minor) {
+	private Vector major, minor;
 
+	public FieldEllipse(Vector major, Vector minor) {
+		this.major = major;
+		this.minor = minor;
 	}
 
 	@Override
