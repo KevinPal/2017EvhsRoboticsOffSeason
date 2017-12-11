@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team4543.map;
 
 public class Vector {
@@ -34,9 +35,17 @@ public class Vector {
 		this.y = y;
 	}
 
+	public double getMagnitude() {
+		return Math.sqrt(x * x + y * y);
+	}
+
 	@Override
 	public String toString() {
 		return "Vector [x=" + x + ", y=" + y + "]";
+	}
+
+	public static double dot(Vector a, Vector b) {
+		return a.getX() * b.getX() + a.getY() * b.getY();
 	}
 
 }

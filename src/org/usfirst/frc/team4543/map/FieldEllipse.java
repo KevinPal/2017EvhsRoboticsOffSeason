@@ -5,15 +5,29 @@ import java.awt.geom.Rectangle2D;
 
 public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do this later,
 	private Vector major, minor;
+	private double x0, y0;
 
-	public FieldEllipse(Vector major, Vector minor) {
-		this.major = major;
-		this.minor = minor;
+	public FieldEllipse(Vector major, Vector minor, double x0, double y0) {
+		if (Vector.dot(major, minor) == 0) {
+			this.major = major;
+			this.minor = minor;
+			this.x0 = x0;
+			this.y0 = y0;
+		} else {
+			System.out.println("no");
+		}
+	}
+
+	public FieldEllipse(double major, double minor, double theta) {
+		// TODO make this later
 	}
 
 	@Override
 	public boolean isWithinBounds(RobotPosition rp) {
-		return contains(rp.getX(), rp.getY());
+		Vector u = new Vector(rp.getX() - x0, rp.getY() - y0);
+		double quantity = Math.pow(Vector.dot(u, major) / Math.pow(major.getMagnitude(), 2), 2)
+				+ Math.pow(Vector.dot(u, minor) / Math.pow(minor.getMagnitude(), 2), 2);
+		return (quantity <= 1);
 	}
 
 	@Override
