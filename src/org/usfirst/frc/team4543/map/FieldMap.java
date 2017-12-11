@@ -1,4 +1,4 @@
-package org.usfirst.team4543.map;
+package org.usfirst.frc.team4543.map;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,6 @@ public class FieldMap extends Subsystem {
 	public void setField(Field f) {
 		this.f = f;
 	}
-
 
 	@Override
 	protected void initDefaultCommand() {

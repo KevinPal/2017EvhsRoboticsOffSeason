@@ -1,4 +1,4 @@
-package org.usfirst.team4543.map;
+package org.usfirst.frc.team4543.map;
 
 import java.awt.geom.Dimension2D;
 import java.util.ArrayList;

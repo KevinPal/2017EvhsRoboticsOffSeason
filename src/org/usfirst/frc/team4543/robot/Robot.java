@@ -3,9 +3,9 @@ package org.usfirst.frc.team4543.robot;
 
 import java.util.HashMap;
 
+import org.usfirst.frc.team4543.map.FieldMap;
 import org.usfirst.frc.team4543.robot.commands.map.UpdateRobotAngleAndRobotPositionEncoder;
 import org.usfirst.frc.team4543.robot.subsystems.DriveTrain;
-import org.usfirst.team4543.map.FieldMap;
 
 import com.kauailabs.navx.frc.AHRS;
 

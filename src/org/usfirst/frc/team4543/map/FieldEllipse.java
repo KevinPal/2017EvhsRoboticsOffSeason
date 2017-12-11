@@ -1,9 +1,12 @@
-package org.usfirst.team4543.map;
+package org.usfirst.frc.team4543.map;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-public class FieldEllipse extends Ellipse2D implements FieldShape {
+public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do this later,
+	public FieldEllipse(Vector major, Vector minor) {
+
+	}
 
 	@Override
 	public boolean isWithinBounds(RobotPosition rp) {

@@ -1,4 +1,4 @@
-package org.usfirst.team4543.map;
+package org.usfirst.frc.team4543.map;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
