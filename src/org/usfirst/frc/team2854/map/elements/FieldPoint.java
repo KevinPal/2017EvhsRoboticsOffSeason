@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import org.opencv.core.Mat;
 import org.usfirst.frc.team2854.map.math.Vector;
 
-public class FieldPoint extends Point2D implements Drawable {
+public class FieldPoint extends Point2D implements MapDrawable {
 	private double x, y;
 
 	public FieldPoint(double x, double y) {

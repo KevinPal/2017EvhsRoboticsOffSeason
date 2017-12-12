@@ -8,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 import org.opencv.core.Mat;
 import org.usfirst.frc.team2854.map.math.Vector;
 
-public class FieldLine extends Line2D implements Drawable{
+public class FieldLine extends Line2D implements MapDrawable{
 	private FieldPoint p1, p2;
 
 	private double getMax(double a, double b) {
