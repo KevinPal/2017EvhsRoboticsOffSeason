@@ -1,0 +1,43 @@
+package org.usfirst.frc.team4543.robot.commands;
+
+import org.usfirst.frc.team4543.map.FieldMap;
+import org.usfirst.frc.team4543.robot.Robot;
+import org.usfirst.frc.team4543.robot.Subsystems;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+
+public class ToTargetPosition extends Command {
+
+	private double distanceThreshold;
+	private FieldMap fm;
+
+	public ToTargetPosition(double distanceThreshold) {
+		requires(Robot.getSubSystem(Subsystems.DRIVE_TRAIN));
+		requires(Robot.getSubSystem(Subsystems.FIELD_MAP));
+		fm = (FieldMap) Robot.getSubSystem(Subsystems.FIELD_MAP);
+		this.distanceThreshold = distanceThreshold;
+	}
+
+	@Override
+	protected void execute() {
+		double distance = Math.sqrt(Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getX(), 2)
+				+ Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getY(), 2));
+		double angle = Math.atan((fm.getRobotPosition().getY() - fm.getTargetPosition().getY())
+				/ (fm.getRobotPosition().getX() - fm.getTargetPosition().getX()));
+		Scheduler.getInstance().add(new DriveAngleDistance(angle, distance));
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return ((Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getX(), 2)
+				+ Math.pow(fm.getTargetPosition().getX() - fm.getRobotPosition().getY(), 2)) < distanceThreshold
+						* distanceThreshold);
+	}
+
+	@Override
+	protected void end() {
+		Scheduler.getInstance().add(new Stop());
+	}
+
+}
