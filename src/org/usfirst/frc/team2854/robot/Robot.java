@@ -3,10 +3,10 @@ package org.usfirst.frc.team2854.robot;
 
 import java.util.HashMap;
 
-import org.usfirst.frc.team2854.map.AccelerometerBased;
-import org.usfirst.frc.team2854.map.FieldMapDriver;
+import org.usfirst.frc.team2854.map.elements.FieldMap;
+import org.usfirst.frc.team2854.map.input.AccelerometerBased;
+import org.usfirst.frc.team2854.map.input.FieldMapDriver;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4543.map.FieldMap;
 
 import com.kauailabs.navx.frc.AHRS;
 

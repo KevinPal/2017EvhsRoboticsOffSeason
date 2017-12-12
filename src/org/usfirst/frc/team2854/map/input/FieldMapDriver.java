@@ -1,12 +1,12 @@
-package org.usfirst.frc.team2854.map;
+package org.usfirst.frc.team2854.map.input;
 
 import java.awt.Color;
 import java.io.ObjectInputStream.GetField;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.usfirst.frc.team4543.map.FieldMap;
-import org.usfirst.frc.team4543.map.Vector;
+import org.usfirst.frc.team2854.map.elements.FieldMap;
+import org.usfirst.frc.team2854.map.math.Vector;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;

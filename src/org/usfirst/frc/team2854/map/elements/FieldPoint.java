@@ -1,9 +1,10 @@
-package org.usfirst.frc.team4543.map;
+package org.usfirst.frc.team2854.map.elements;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team2854.map.math.Vector;
 
 public class FieldPoint extends Point2D implements Drawable {
 	private double x, y;
@@ -32,8 +33,8 @@ public class FieldPoint extends Point2D implements Drawable {
 	@Override
 	public void draw(Mat m, Vector translation, Color c) {
 		byte[] colorByte = new byte[] {(byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed()};
-		int x = (int)translation.x;
-		int y = (int)translation.y;
+		int x = (int)translation.getX();
+		int y = (int)translation.getY();
 		
 		int size = 2;
 		for(int i = -size; i < size; i++) {

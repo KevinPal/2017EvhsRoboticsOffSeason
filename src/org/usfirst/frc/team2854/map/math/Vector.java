@@ -1,6 +1,4 @@
-package org.usfirst.frc.team4543.map;
-
-import org.usfirst.frc.team2854.map.Matrix;
+package org.usfirst.frc.team2854.map.math;
 
 /**
  * A class to represent a 2D Vector

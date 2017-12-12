@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2854.map;
+package org.usfirst.frc.team2854.map.math;
 
 public class Matrix {
 
