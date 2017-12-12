@@ -18,6 +18,7 @@ tomcat
 *.sar
 *.class
 bin/
+build/
 
 # Maven 
 target/
