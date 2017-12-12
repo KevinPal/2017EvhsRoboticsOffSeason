@@ -58,7 +58,7 @@ public class FieldMap implements Runnable{
 			for(int i = 0; i < sWidth; i++) {
 				for(int j = 0; j < sHeight; j++) {
 					
-					screen.put(j, i, new byte[] {(byte) 0xff});
+					screen.put(j, i, new byte[] {(byte) 0xff});	
 				}
 			}
 			screen.put((int)screenPos.getY(),(int) screenPos.getX(), new byte[] {(byte) 0x00});
