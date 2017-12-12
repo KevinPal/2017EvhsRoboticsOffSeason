@@ -1,15 +1,15 @@
-package org.usfirst.frc.team4543.map;
+package org.usfirst.frc.team2854.map.math;
 
 import java.awt.geom.Point2D;
 
 public class RobotPosition extends Vector {
 	private double theta;
 
-	RobotPosition(double x, double y) {
+	public RobotPosition(double x, double y) {
 		super(x, y);
 	}
 
-	RobotPosition() {
+	public RobotPosition() {
 		super(0, 0);
 	}
 

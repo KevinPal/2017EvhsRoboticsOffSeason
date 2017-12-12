@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2854.robot;
 
-import org.usfirst.frc.team2854.map.DualSensor;
+import org.usfirst.frc.team2854.map.input.DualSensor;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.frc.AHRS.SerialDataType;

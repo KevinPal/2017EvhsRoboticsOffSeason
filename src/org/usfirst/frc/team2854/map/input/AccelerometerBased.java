@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2854.map;
+package org.usfirst.frc.team2854.map.input;
 
 import org.usfirst.frc.team2854.robot.Robot;
 import org.usfirst.frc.team2854.robot.SensorBoard;
