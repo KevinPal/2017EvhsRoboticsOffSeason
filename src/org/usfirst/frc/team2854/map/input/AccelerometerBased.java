@@ -1,9 +1,8 @@
 package org.usfirst.frc.team2854.map.input;
 
-import org.usfirst.frc.team2854.robot.Robot;
-import org.usfirst.frc.team2854.robot.SensorBoard;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import src.org.usfirst.frc.team2854.robot.Robot;
+import src.org.usfirst.frc.team2854.robot.SensorBoard;
 
 public class AccelerometerBased implements MapInput {
 
