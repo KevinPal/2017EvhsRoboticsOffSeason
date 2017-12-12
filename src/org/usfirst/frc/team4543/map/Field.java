@@ -1,9 +1,9 @@
 package org.usfirst.frc.team4543.map;
 
-import java.awt.geom.Dimension2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-class Field extends Dimension2D implements FieldShape {
+class Field extends Rectangle2D implements FieldShape {
 	private double width;
 	private double height;
 	private ArrayList<FieldShape> innerFieldPieces;
@@ -32,7 +32,7 @@ class Field extends Dimension2D implements FieldShape {
 	public boolean isWithinBounds(RobotPosition rp) {
 		double x = rp.getX();
 		double y = rp.getY();
-		return isOutOfInnerPieces(rp) && !(x < 0 || y < 0 || x > getWidth() || y > getHeight());
+		return isOutOfInnerPieces(rp) && contains(rp.getX(), rp.getY());
 	}
 
 	@Override
@@ -45,7 +45,6 @@ class Field extends Dimension2D implements FieldShape {
 		return height;
 	}
 
-	@Override
 	public void setSize(double width, double height) {
 		this.width = width;
 		this.height = height;
@@ -53,5 +52,44 @@ class Field extends Dimension2D implements FieldShape {
 
 	public void addFieldShape(FieldShape fs) {
 		innerFieldPieces.add(fs);
+	}
+
+	@Override
+	public Rectangle2D createIntersection(Rectangle2D arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rectangle2D createUnion(Rectangle2D arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int outcode(double arg0, double arg1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setRect(double arg0, double arg1, double arg2, double arg3) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public double getX() {
+		return 0;
+	}
+
+	@Override
+	public double getY() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
 	}
 }
