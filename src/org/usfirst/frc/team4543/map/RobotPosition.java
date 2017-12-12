@@ -2,43 +2,32 @@ package org.usfirst.frc.team4543.map;
 
 import java.awt.geom.Point2D;
 
-public class RobotPosition extends Point2D {
-	private double x;
-	private double y;
+public class RobotPosition extends Vector {
 	private double theta;
 
 	RobotPosition(double x, double y) {
-		this.x = x;
-		this.y = y;
+		super(x, y);
 	}
 
 	RobotPosition() {
-		x = 0;
-		y = 0;
-	}
-
-	@Override
-	public double getX() {
-		return x;
-	}
-
-	@Override
-	public double getY() {
-		return y;
+		super(0, 0);
 	}
 
 	public double getTheta() {
 		return theta;
+
 	}
 
-	@Override
 	public void setLocation(double x, double y) {
-		this.x = x;
-		this.x = y;
+		super.x = x;
+		super.x = y;
 	}
 
 	public void setTheta(double theta) {
 		this.theta = theta;
 	}
-
+	
+	public void rotate(double theta) {
+		this.theta += theta;
+	}
 }

@@ -14,7 +14,7 @@ public class SensorBoard {
 
 	private AHRS navX;
 	private ADXRS450_Gyro spiGyro;
-	private BuiltInAccelerometer accelerometer;
+	private BuiltInAccelerometer builtInacc;
 	
 	private DualSensor gyro;
 	private DualSensor forwardAccel;
@@ -23,7 +23,7 @@ public class SensorBoard {
 		navX = new AHRS(SerialPort.Port.kMXP);
 		System.out.println("--------------" + navX.isConnected() + "----------------");
 		spiGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
-		accelerometer = new BuiltInAccelerometer();
+		builtInacc = new BuiltInAccelerometer();
 		gyro = new DualSensor("Gyro");
 		forwardAccel = new DualSensor("Forward Acceleration");
 	}
@@ -32,7 +32,7 @@ public class SensorBoard {
 		long startTime = System.nanoTime();
 		while(System.nanoTime() - startTime < time) {
 			gyro.addValue(spiGyro.getRate(), navX.getRate());
-			forwardAccel.addValue(accelerometer.getX(), navX.getRawAccelY());
+			forwardAccel.addValue(builtInacc.getX(), navX.getRawAccelY());
 		}
 		gyro.calibrate();
 		forwardAccel.calibrate();
@@ -43,7 +43,7 @@ public class SensorBoard {
 	}
 
 	public double getForwardAccelValue() {
-		return forwardAccel.calculateValue(accelerometer.getX(), navX.getRawAccelX());
+		return forwardAccel.calculateValue(builtInacc.getX(), navX.getRawAccelX());
 	}
 
 	public DualSensor getGyro() {
@@ -55,7 +55,7 @@ public class SensorBoard {
 	}
 
 	public BuiltInAccelerometer getAccelerometer() {
-		return accelerometer;
+		return builtInacc;
 	}
 
 	public AHRS getNavX() {

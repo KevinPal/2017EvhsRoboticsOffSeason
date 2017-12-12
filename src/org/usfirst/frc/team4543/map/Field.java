@@ -1,9 +1,12 @@
 package org.usfirst.frc.team4543.map;
 
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-class Field extends Rectangle2D implements FieldShape {
+import org.opencv.core.Mat;
+
+public class Field extends Rectangle2D implements FieldShape {
 	private double width;
 	private double height;
 	private ArrayList<FieldShape> innerFieldPieces;
@@ -91,5 +94,23 @@ class Field extends Rectangle2D implements FieldShape {
 	@Override
 	public boolean isEmpty() {
 		return false;
+	}
+
+
+
+	@Override
+	public void draw(Mat m, Vector translation, Color c) {
+		byte[] colorByte = new byte[] {(byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed()};
+		for(int y = 0; y < getHeight(); y++) {
+			for(int x = 0; x < getWidth(); x++) {
+				if(x==0||y==0||x==getWidth()-1||y==getHeight()-1) {//TODO make more effecient
+					m.put((int)(y+getY()+translation.getY()), (int)( x+getX()+translation.getX()), colorByte);
+				}
+			}
+		}
+		for(FieldShape shape:innerFieldPieces) {
+			shape.draw(m, new Vector(getX(), getY()), c);
+		}
+		
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class FieldMap extends Subsystem {
+public class FieldMap {
 	private RobotPosition rPos;
 	private RobotPosition targetPos;
 	private Field f;
@@ -68,7 +68,5 @@ public class FieldMap extends Subsystem {
 		this.f = f;
 	}
 
-	@Override
-	protected void initDefaultCommand() {
-	}
+
 }

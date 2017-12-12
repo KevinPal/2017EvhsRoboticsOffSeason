@@ -4,8 +4,11 @@ package org.usfirst.frc.team2854.robot;
 import java.util.HashMap;
 
 import org.usfirst.frc.team2854.map.AccelerometerBased;
-import org.usfirst.frc.team2854.map.FieldMap;
+import org.usfirst.frc.team2854.map.FieldMapDriver;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4543.map.FieldMap;
+
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +33,15 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	private static HashMap<SubsystemNames, Subsystem> subsystems;
 	private static SensorBoard sensors;
+	
+	public static FieldMap fm;
+	
+	public static AHRS ahrs;
+	private static double fieldWidth;// TODO decide the unit of this, looks like inches
+	private static double fieldHeight;// TODO decide the unit of this looks like inches
+	private static double startingX = 0;
+	private static double startingY = 0;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,10 +56,21 @@ public class Robot extends IterativeRobot {
 		sensors.calibrate((long) 2E9);
 
 		AccelerometerBased mapInput = new AccelerometerBased();
-		FieldMap map = new FieldMap( 396, 304, 250, 250, mapInput);
-		
-	}
 
+		fm = new FieldMap(fieldWidth, fieldHeight);
+		fm.setRobotPosition(startingX, startingY);
+		fm.setTargetPosition(startingX, startingY, false);
+		
+		FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
+
+		
+		SmartDashboard.putData("Auto mode", chooser);
+		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
+	}
+	
+
+
+	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
@@ -61,6 +84,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**

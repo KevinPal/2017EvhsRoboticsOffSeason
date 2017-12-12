@@ -1,9 +1,12 @@
 package org.usfirst.frc.team4543.map;
 
+import java.awt.Color;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
-public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do this later,
+import org.opencv.core.Mat;
+
+public class FieldEllipse extends Ellipse2D implements FieldShape, Drawable {// TODO Do this later,
 	private Vector major, minor;
 	private double x0, y0;
 
@@ -19,14 +22,14 @@ public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do th
 	}
 
 	public FieldEllipse(double major, double minor, double theta) {
-		// TODO make this later
+		// TODO make this later	
 	}
 
 	@Override
 	public boolean isWithinBounds(RobotPosition rp) {
 		Vector u = new Vector(rp.getX() - x0, rp.getY() - y0);
-		double quantity = Math.pow(Vector.dot(u, major) / Math.pow(major.getMagnitude(), 2), 2)
-				+ Math.pow(Vector.dot(u, minor) / Math.pow(minor.getMagnitude(), 2), 2);
+		double quantity = Math.pow(Vector.dot(u, major) / Math.pow(major.length(), 2), 2)
+				+ Math.pow(Vector.dot(u, minor) / Math.pow(minor.length(), 2), 2);
 		return (quantity <= 1);
 	}
 
@@ -71,5 +74,18 @@ public class FieldEllipse extends Ellipse2D implements FieldShape {// TODO Do th
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void draw(Mat m, Vector translation, Color c) {
+		double step = .1;
+		byte[] colorByte = new byte[] {(byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed()};
+		for(double theta = 0; theta < 2*Math.PI; theta += step) {
+			int x = (int)(major.length() * Math.cos(theta) + translation.x);
+			int y = (int)(minor.length() * Math.sin(theta) + translation.y); //TODO kinda yoloed, should double check
+			m.put(y, x, colorByte);
+		}
+		
+	}
+
 
 }
