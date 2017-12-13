@@ -23,7 +23,7 @@ public class EncoderBased implements MapInput {
 
 	@Override
 	public double getPosError() {
-		// TODO Auto-generated method stub
+		// TODO Do I account slipping in this?`
 		return 0;
 	}
 
