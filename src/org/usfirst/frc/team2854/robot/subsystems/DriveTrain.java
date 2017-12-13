@@ -1,5 +1,6 @@
-package org.usfirst.frc.team4543.robot.subsystems;
+package org.usfirst.frc.team2854.robot.subsystems;
 
+import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
 import org.usfirst.frc.team4543.robot.RobotMap;
 
 import com.ctre.CANTalon;
@@ -15,10 +16,9 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
-	private int leftT1Zero, leftT2Zero, rightT1Zero, rightT2Zero;
-	private final double width;
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new JoystickDrive());
 	}
 
 	public DriveTrain() {
@@ -33,9 +33,6 @@ public class DriveTrain extends Subsystem {
 
 		rightT2 = new CANTalon(RobotMap.rightTalonID2);
 		rightT2.setInverted(false);
-
-		width = 100;
-		// TODO put dimensions of the drivetrain in here
 
 	}
 
@@ -53,23 +50,12 @@ public class DriveTrain extends Subsystem {
 		rightT2.set(0);
 	}
 
-	public void zeroEncoders() {
-		leftT1Zero = leftT1.getEncPosition();
-		leftT2Zero = leftT2.getEncPosition();
-		rightT1Zero = rightT1.getEncPosition();
-		rightT2Zero = rightT2.getEncPosition();
+	public CANTalon getLeftT1() {
+		return leftT1;
 	}
 
-	public int getLeftEncoder() {
-		return (int) Math.round(((leftT1.getEncPosition() - leftT1Zero) + (leftT2.getEncPosition() - leftT2Zero)) / 2);
+	public CANTalon getRightT1() {
+		return rightT1;
 	}
 
-	public int getRightEncoder() {
-		return (int) Math
-				.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
-	}
-
-	public double getWidth() {
-		return width;
-	}
 }

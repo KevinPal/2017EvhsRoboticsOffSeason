@@ -1,13 +1,13 @@
-package org.usfirst.frc.team4543.robot.commands;
+package org.usfirst.frc.team2854.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class DriveSquare extends CommandGroup {
+public class ExampleCommandGroup extends CommandGroup {
 
-    public DriveSquare() {
+    public ExampleCommandGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -25,19 +25,7 @@ public class DriveSquare extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	
-    	addSequential(new DriveForwardTime(2));
-    	addSequential(new TurnToAngle(90));
-    	
-    	addSequential(new DriveForwardTime(2));
-    	addSequential(new TurnToAngle(90));
-    	
-    	addSequential(new DriveForwardTime(2));
-    	addSequential(new TurnToAngle(90));
-    	
-    	addSequential(new DriveForwardTime(2));
-    	addSequential(new TurnToAngle(90));
-    	
+
     	
     	
     }
