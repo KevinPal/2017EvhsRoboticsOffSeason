@@ -55,7 +55,7 @@ public class FieldMapDriver implements Runnable{
 			robotInput.update();
 			//System.out.println("asd " + map.getRobotPosition());
 			Vector pos = map.getRobotPosition();
-			map.setRobotPosition(pos.getX() + robotInput.getDeltaForward(), 2);
+			map.setRobotPosition(pos.getX() + robotInput.getDeltaForward(), pos.getY());
 			SmartDashboard.putString("Robot Position", "[" + map.getRobotPosition().toString() + "]");
 			Mat screen = new Mat(sHeight, sWidth, CvType.CV_8UC3);
 			
