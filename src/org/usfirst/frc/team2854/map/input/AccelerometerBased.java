@@ -13,6 +13,7 @@ public class AccelerometerBased implements MapInput {
 	private boolean init = true;
 	private double velocity = 0;
 	
+	private double g =  9.806;
 	
 	public AccelerometerBased() {
 		sensors = Robot.getSensors();
@@ -60,7 +61,7 @@ public class AccelerometerBased implements MapInput {
 		
 		
 
-		velocity += sensors.getNavX().getWorldLinearAccelY() * deltaTime * 10;
+		velocity += sensors.getNavX().getWorldLinearAccelY() * deltaTime * g;
 		
 		SmartDashboard.putNumber("Velocity", velocity);
 		

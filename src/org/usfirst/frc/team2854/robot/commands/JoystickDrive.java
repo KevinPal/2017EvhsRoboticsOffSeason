@@ -26,7 +26,7 @@ public class JoystickDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
-    	drive.drive(OI.joysick.getRawAxis(1) * Config.driveSpeedMultiplier, OI.joysick.getRawAxis(5) * Config.driveSpeedMultiplier);
+    	drive.drive(OI.joystick.getRawAxis(1) * Config.driveSpeedMultiplier, OI.joystick.getRawAxis(5) * Config.driveSpeedMultiplier);
     }
 
     // Make this return true when this Command no longer needs to run execute()

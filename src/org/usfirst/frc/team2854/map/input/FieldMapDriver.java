@@ -49,12 +49,24 @@ public class FieldMapDriver implements Runnable{
 			startTime = System.nanoTime();
 			deltaTime = (startTime - lastTime)/1E9d;
 			robotInput.update();
+			Vector pos = map.getRobotPosition();
+			map.setRobotPosition(pos.getX() + robotInput.getDeltaForward(), pos.getY());
+			
 			Mat screen = new Mat(sHeight, sWidth, CvType.CV_8UC3);
 			
 			for(int i = 0; i < sWidth; i++) {
 				for(int j = 0; j < sHeight; j++) {
 					
 					screen.put(j, i, new byte[] {(byte) 0xff});	
+				}
+			}
+			int y = (int)(map.getRobotPosition().getY()*sHeight/fHeight);
+			int x = (int)(map.getRobotPosition().getX()*sWidth/fWidth);
+			
+			int size = 100;
+			for(int i = -size; i < size; i++) {
+				for(int j = -size; j < size; j++) {
+					screen.put(y+i, x+j , new byte[]{0, (byte) 0xff, 0});
 				}
 			}
 			

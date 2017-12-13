@@ -11,4 +11,3 @@ public interface MapInput {
 	public void update();
 	
 }
- 

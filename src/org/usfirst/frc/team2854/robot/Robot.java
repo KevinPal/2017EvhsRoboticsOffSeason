@@ -37,8 +37,8 @@ public class Robot extends IterativeRobot {
 	public static FieldMap fm;
 	
 	public static AHRS ahrs;
-	private static double fieldWidth;// TODO decide the unit of this, looks like inches
-	private static double fieldHeight;// TODO decide the unit of this looks like inches
+	private static double fieldWidth = 4.2;// TODO decide the unit of this, looks like inches (meters -kp)
+	private static double fieldHeight = 3.2;// TODO decide the unit of this looks like inches (meters -kp)
 	private static double startingX = 0;
 	private static double startingY = 0;
 	
@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("STARTING");
 		subsystems = new HashMap<SubsystemNames, Subsystem>();
 		//subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -56,7 +57,7 @@ public class Robot extends IterativeRobot {
 		sensors.calibrate((long) 2E9);
 
 		AccelerometerBased mapInput = new AccelerometerBased();
-
+		
 		fm = new FieldMap(fieldWidth, fieldHeight);
 		fm.setRobotPosition(startingX, startingY);
 		fm.setTargetPosition(startingX, startingY, false);
@@ -65,7 +66,7 @@ public class Robot extends IterativeRobot {
 
 		
 		SmartDashboard.putData("Auto mode", chooser);
-		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
+		//subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 	}
 	
 
@@ -137,6 +138,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
+		
 		Scheduler.getInstance().run();
 	}
 

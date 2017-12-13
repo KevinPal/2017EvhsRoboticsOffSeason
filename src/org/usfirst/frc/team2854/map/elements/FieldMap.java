@@ -1,10 +1,6 @@
 package org.usfirst.frc.team2854.map.elements;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc.team2854.map.math.RobotPosition;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FieldMap {
 	private RobotPosition rPos;
@@ -15,6 +11,7 @@ public class FieldMap {
 		f = new Field(width, height);
 		rPos = new RobotPosition();
 		targetPos = new RobotPosition();
+		//f.getInnerFieldPieces().add(new FieldPoint(rPos.getX(), rPos.getY()));
 	}
 
 	public Field getField() {
@@ -35,6 +32,7 @@ public class FieldMap {
 		} else {
 			rPos.setLocation(x, y);
 		}
+		//f.getInnerFieldPieces().set(0, new FieldPoint(x, y));
 	}
 
 	public void setRobotAngle(double angle) {

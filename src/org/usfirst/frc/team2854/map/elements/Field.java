@@ -115,4 +115,8 @@ public class Field extends Rectangle2D implements FieldShape {
 		}
 		
 	}
+
+	public ArrayList<FieldShape> getInnerFieldPieces() {
+		return innerFieldPieces;
+	}
 }

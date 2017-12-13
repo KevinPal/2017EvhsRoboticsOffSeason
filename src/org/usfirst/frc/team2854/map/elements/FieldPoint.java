@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team2854.map.math.RobotPosition;
 import org.usfirst.frc.team2854.map.math.Vector;
 
-public class FieldPoint extends Point2D implements MapDrawable {
+public class FieldPoint extends Point2D implements MapDrawable, FieldShape {
 	private double x, y;
 
 	public FieldPoint(double x, double y) {
@@ -42,6 +43,11 @@ public class FieldPoint extends Point2D implements MapDrawable {
 				m.put(y+i, x+j, colorByte);
 			}
 		}
+	}
+
+	@Override
+	public boolean isWithinBounds(RobotPosition rp) {
+		return false; //cant be within a point?
 	}
 
 	
