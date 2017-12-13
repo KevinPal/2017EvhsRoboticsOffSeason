@@ -3,10 +3,6 @@ package org.usfirst.frc.team2854.robot.subsystems;
 import org.usfirst.frc.team2854.robot.RobotMap;
 import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
 
-import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-
 /**
  *
  */
