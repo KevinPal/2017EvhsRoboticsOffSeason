@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2854.robot;
+package org.usfirst.frc.team4543.robot;
 
 import org.usfirst.frc.team2854.map.input.DualSensor;
 
@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 
@@ -20,7 +21,8 @@ public class SensorBoard {
 	private DualSensor forwardAccel;
 	
 	public SensorBoard() {
-		navX = new AHRS(SerialPort.Port.kMXP);
+		navX = new AHRS(I2C.Port.kMXP);
+		
 		System.out.println("--------------" + navX.isConnected() + "----------------");
 		spiGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
 		builtInacc = new BuiltInAccelerometer();

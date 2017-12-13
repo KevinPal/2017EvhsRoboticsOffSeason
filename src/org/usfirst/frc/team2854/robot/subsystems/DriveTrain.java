@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2854.robot.subsystems;
 
-import org.usfirst.frc.team2854.robot.RobotMap;
 import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
+import org.usfirst.frc.team4543.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
@@ -48,6 +48,14 @@ public class DriveTrain extends Subsystem {
 		leftT2.set(0);
 		rightT1.set(0);
 		rightT2.set(0);
+	}
+
+	public CANTalon getLeftT1() {
+		return leftT1;
+	}
+
+	public CANTalon getRightT1() {
+		return rightT1;
 	}
 
 }

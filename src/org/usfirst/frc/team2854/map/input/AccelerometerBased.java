@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2854.map.input;
 
-import org.usfirst.frc.team2854.robot.Robot;
-import org.usfirst.frc.team2854.robot.SensorBoard;
+import org.usfirst.frc.team4543.robot.Robot;
+import org.usfirst.frc.team4543.robot.SensorBoard;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -59,9 +59,12 @@ public class AccelerometerBased implements MapInput {
 		SmartDashboard.putBoolean("Is Connected", sensors.getNavX().isConnected());
 		SmartDashboard.putBoolean("Is Callibrating", sensors.getNavX().isCalibrating());
 		
+		SmartDashboard.putNumber("NavX Acc World X", sensors.getAccelerometer().getX() * g);
 		
 
-		velocity += sensors.getNavX().getWorldLinearAccelY() * deltaTime * g;
+		velocity += sensors.getNavX().getRawAccelY() * deltaTime * g;
+		//velocity += (sensors.getAccelerometer().getX()) * deltaTime * g;
+
 		
 		SmartDashboard.putNumber("Velocity", velocity);
 		

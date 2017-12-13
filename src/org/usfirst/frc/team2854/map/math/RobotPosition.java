@@ -19,8 +19,8 @@ public class RobotPosition extends Vector {
 	}
 
 	public void setLocation(double x, double y) {
-		super.x = x;
-		super.x = y;
+		super.setX(x);
+		super.setY(y);
 	}
 
 	public void setTheta(double theta) {

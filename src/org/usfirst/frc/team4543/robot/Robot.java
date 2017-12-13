@@ -1,5 +1,5 @@
 
-package org.usfirst.frc.team2854.robot;
+package org.usfirst.frc.team4543.robot;
 
 import java.util.HashMap;
 
@@ -37,10 +37,10 @@ public class Robot extends IterativeRobot {
 	public static FieldMap fm;
 	
 	public static AHRS ahrs;
-	private static double fieldWidth = 4.2;// TODO decide the unit of this, looks like inches (meters -kp)
+	private static double fieldWidth = 10;// TODO decide the unit of this, looks like inches (meters -kp)
 	private static double fieldHeight = 3.2;// TODO decide the unit of this looks like inches (meters -kp)
-	private static double startingX = 0;
-	private static double startingY = 0;
+	private static double startingX = 1;
+	private static double startingY = 1;
 	
 
 	/**
@@ -50,12 +50,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("STARTING");
-		subsystems = new HashMap<SubsystemNames, Subsystem>();
-		//subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
+		//subsystems = new HashMap<SubsystemNames, Subsystem>();
+		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 		SmartDashboard.putData("Auto mode", chooser);
 		sensors = new SensorBoard();
 		sensors.calibrate((long) 2E9);
-
+		
 		AccelerometerBased mapInput = new AccelerometerBased();
 		
 		fm = new FieldMap(fieldWidth, fieldHeight);

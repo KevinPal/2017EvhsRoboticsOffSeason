@@ -8,7 +8,7 @@ import org.opencv.core.Mat;
 import org.usfirst.frc.team2854.map.math.RobotPosition;
 import org.usfirst.frc.team2854.map.math.Vector;
 
-public class Field extends Rectangle2D implements FieldShape {
+public class Field implements FieldShape {
 	private double width;
 	private double height;
 	private ArrayList<FieldShape> innerFieldPieces;
@@ -34,18 +34,16 @@ public class Field extends Rectangle2D implements FieldShape {
 		return true;
 	}
 
-	public boolean isWithinBounds(RobotPosition rp) {
-		double x = rp.getX();
-		double y = rp.getY();
-		return isOutOfInnerPieces(rp) && contains(rp.getX(), rp.getY());
-	}
+//	public boolean isWithinBounds(RobotPosition rp) {
+//		double x = rp.getX();
+//		double y = rp.getY();
+//		return isOutOfInnerPieces(rp) && contains(rp.getX(), rp.getY()); TODO extending rectnalge 2d kills shit so like uh not using @ zheng
+//	}
 
-	@Override
 	public double getWidth() {
 		return width;
 	}
 
-	@Override
 	public double getHeight() {
 		return height;
 	}
@@ -59,41 +57,34 @@ public class Field extends Rectangle2D implements FieldShape {
 		innerFieldPieces.add(fs);
 	}
 
-	@Override
 	public Rectangle2D createIntersection(Rectangle2D arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Rectangle2D createUnion(Rectangle2D arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public int outcode(double arg0, double arg1) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public void setRect(double arg0, double arg1, double arg2, double arg3) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public double getX() {
 		return 0;
 	}
 
-	@Override
 	public double getY() {
 		return 0;
 	}
 
-	@Override
 	public boolean isEmpty() {
 		return false;
 	}
@@ -118,5 +109,11 @@ public class Field extends Rectangle2D implements FieldShape {
 
 	public ArrayList<FieldShape> getInnerFieldPieces() {
 		return innerFieldPieces;
+	}
+
+	@Override
+	public boolean isWithinBounds(RobotPosition rp) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

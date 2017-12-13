@@ -10,6 +10,7 @@ public class FieldMap {
 	public FieldMap(double width, double height) {
 		f = new Field(width, height);
 		rPos = new RobotPosition();
+		System.out.println(rPos);
 		targetPos = new RobotPosition();
 		//f.getInnerFieldPieces().add(new FieldPoint(rPos.getX(), rPos.getY()));
 	}
@@ -19,6 +20,7 @@ public class FieldMap {
 	}
 
 	public RobotPosition getRobotPosition() {
+		//System.out.println(rPos);
 		return rPos;
 	}
 
@@ -28,6 +30,7 @@ public class FieldMap {
 
 	public void setRobotPosition(double x, double y) {
 		if (rPos.equals(null)) {
+			System.out.println("Generating new robot position");
 			rPos = new RobotPosition(x, y);
 		} else {
 			rPos.setLocation(x, y);
