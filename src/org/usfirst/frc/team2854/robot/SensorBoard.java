@@ -1,7 +1,14 @@
 package org.usfirst.frc.team2854.robot;
 
 import org.usfirst.frc.team2854.map.input.DualSensor;
+
 import com.ctre.CANTalon;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 
 public class SensorBoard {
 

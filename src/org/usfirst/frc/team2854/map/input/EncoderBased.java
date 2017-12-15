@@ -1,18 +1,19 @@
 package org.usfirst.frc.team2854.map.input;
 
-import java.text.MessageFormat.Field;
-
 import org.usfirst.frc.team2854.robot.Robot;
 import org.usfirst.frc.team2854.robot.SensorBoard;
+import org.usfirst.frc.team2854.robot.SubsystemNames;
 
 public class EncoderBased implements MapInput {
 	private double deltaX;
 	private double deltaY;
 	private double deltaTheta;
 	private SensorBoard s;
+	private double width;
 
 	public EncoderBased() {
 		s = Robot.getSensors();
+		width = (DriveTrain) (Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
 	}
 
 	@Override
