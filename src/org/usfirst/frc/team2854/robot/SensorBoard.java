@@ -75,4 +75,8 @@ public class SensorBoard {
 		return (r1.getEncPosition() + r2.getEncPosition()) / 2 - zeroRight;
 	}
 
+	public void zeroEncoders() {
+		zeroLeft = getLeftEncoder();
+		zeroRight = getRightEncoder();
+	}
 }
