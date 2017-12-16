@@ -9,7 +9,6 @@ import org.usfirst.frc.team2854.map.elements.FieldMap;
 import org.usfirst.frc.team2854.map.math.Vector;
 
 import com.ctre.CANTalon;
-import com.ctre.CanTalonJNI;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -33,7 +32,7 @@ public class FieldMapDriver implements Runnable{
 		this.fHeight = map.getField().getHeight();
 		this.sWidth = sWidth;
 		this.sHeight = sHeight;
-		this.map = new FieldMap(fWidth, fHeight);
+		this.map = map;
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		input = CameraServer.getInstance().getVideo();
 		output = CameraServer.getInstance().putVideo("Map", sWidth, sHeight);

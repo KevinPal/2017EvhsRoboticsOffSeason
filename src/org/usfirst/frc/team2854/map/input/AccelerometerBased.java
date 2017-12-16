@@ -59,10 +59,11 @@ public class AccelerometerBased implements MapInput {
 		SmartDashboard.putBoolean("Is Connected", sensors.getNavX().isConnected());
 		SmartDashboard.putBoolean("Is Callibrating", sensors.getNavX().isCalibrating());
 		
-		SmartDashboard.putNumber("NavX Acc World X", sensors.getAccelerometer().getX() * g);
-		
+		SmartDashboard.putNumber("Rio Acc X", sensors.getAccelerometer().getX() * g);
+		SmartDashboard.putNumber("Rio + NavX Accelorometer X", sensors.getForwardAccelValue() * g);
 
-		velocity += sensors.getNavX().getRawAccelY() * deltaTime * g;
+
+		velocity += sensors.getForwardAccelValue() * g * deltaTime;
 		//velocity += (sensors.getAccelerometer().getX()) * deltaTime * g;
 
 		

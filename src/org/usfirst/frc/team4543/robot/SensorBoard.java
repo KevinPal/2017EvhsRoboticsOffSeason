@@ -45,7 +45,7 @@ public class SensorBoard {
 	}
 
 	public double getForwardAccelValue() {
-		return forwardAccel.calculateValue(builtInacc.getX(), navX.getRawAccelX());
+		return forwardAccel.calculateValue(builtInacc.getX(), navX.getRawAccelY());
 	}
 
 	public DualSensor getGyro() {

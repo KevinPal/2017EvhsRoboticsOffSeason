@@ -6,11 +6,16 @@ import java.util.HashMap;
 import org.usfirst.frc.team2854.map.elements.FieldMap;
 import org.usfirst.frc.team2854.map.input.AccelerometerBased;
 import org.usfirst.frc.team2854.map.input.FieldMapDriver;
+import org.usfirst.frc.team2854.robot.commands.ShiftDown;
+import org.usfirst.frc.team2854.robot.commands.ShiftUp;
+import org.usfirst.frc.team2854.robot.commands.TurnToAngle;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,7 +33,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	private static HashMap<SubsystemNames, Subsystem> subsystems;
@@ -37,11 +41,12 @@ public class Robot extends IterativeRobot {
 	public static FieldMap fm;
 	
 	public static AHRS ahrs;
-	private static double fieldWidth = 10;// TODO decide the unit of this, looks like inches (meters -kp)
-	private static double fieldHeight = 3.2;// TODO decide the unit of this looks like inches (meters -kp)
-	private static double startingX = 1;
-	private static double startingY = 1;
+	private static double fieldWidth = 3.5;// TODO decide the unit of this, looks like inches (meters -kp)
+	private static double fieldHeight = 1.7;// TODO decide the unit of this looks like inches (meters -kp)
+	private static double startingX = 0;
+	private static double startingY = .8;
 	
+	private static Compressor compressor;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -51,7 +56,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("STARTING");
-		//subsystems = new HashMap<SubsystemNames, Subsystem>();
+		subsystems = new HashMap<SubsystemNames, Subsystem>();
 		subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
 		SmartDashboard.putData("Auto mode", chooser);
 		sensors = new SensorBoard();
@@ -65,9 +70,9 @@ public class Robot extends IterativeRobot {
 		
 		FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
 
-		
+		chooser.addObject("turn 90", new TurnToAngle(180));
 		SmartDashboard.putData("Auto mode", chooser);
-		//subsystems.put(SubsystemNames.DRIVE_TRAIN, new DriveTrain());
+		SmartDashboard.putData(new TurnToAngle(180));
 	}
 	
 
@@ -130,6 +135,12 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+	//	compressor = new Compressor(4);		
+	//	compressor.setClosedLoopControl(true);
+//		for(int i = 0; i < 8; i++) {
+//			Solenoid s = new Solenoid(i);
+//			s.set(true);
+//		}
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
@@ -140,7 +151,17 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
+//		SmartDashboard.putData("Compressor", compressor);
+//		SmartDashboard.putBoolean("Not connected fault", compressor.getCompressorNotConnectedFault());
+//		SmartDashboard.putBoolean("Shorted fault", compressor.getCompressorShortedFault());
+//		SmartDashboard.putBoolean("Current too high fault", compressor.getCompressorCurrentTooHighFault());
+//		SmartDashboard.putBoolean("Pressure switch (true if low)", compressor.getPressureSwitchValue());
+	
 		
+		OI.buttonA.whenPressed(new TurnToAngle(90));
+		OI.buttonB.whenPressed(new ShiftDown());
+		SmartDashboard.putNumber("Angle", getSensors().getNavX().getAngle());
+
 		Scheduler.getInstance().run();
 	}
 
