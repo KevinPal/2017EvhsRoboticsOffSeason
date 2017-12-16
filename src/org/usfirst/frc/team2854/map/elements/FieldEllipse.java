@@ -8,7 +8,7 @@ import org.opencv.core.Mat;
 import org.usfirst.frc.team2854.map.math.RobotPosition;
 import org.usfirst.frc.team2854.map.math.Vector;
 
-public class FieldEllipse extends Ellipse2D implements FieldShape, MapDrawable {// TODO Do this later,
+public class FieldEllipse extends Ellipse2D implements FieldShape, MapDrawable {
 	private Vector major, minor;
 	private double x0, y0;
 
