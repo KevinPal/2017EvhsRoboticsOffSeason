@@ -24,7 +24,8 @@ public class FieldEllipse extends Ellipse2D implements FieldShape, MapDrawable {
 	}
 
 	public FieldEllipse(double major, double minor, double theta) {
-		// TODO make this later	
+		this.major = new Vector(Math.cos(theta) * major, Math.sin(theta) * major);
+		this.minor = new Vector(Math.cos(theta + 90) * minor, Math.sin(theta + 90) * minor);
 	}
 
 	@Override
@@ -80,14 +81,14 @@ public class FieldEllipse extends Ellipse2D implements FieldShape, MapDrawable {
 	@Override
 	public void draw(Mat m, Vector translation, Color c) {
 		double step = .1;
-		byte[] colorByte = new byte[] {(byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed()};
-		for(double theta = 0; theta < 2*Math.PI; theta += step) {
-			int x = (int)(major.length() * Math.cos(theta) + translation.getX());
-			int y = (int)(minor.length() * Math.sin(theta) + translation.getY()); //TODO kinda yoloed, should double check
+		byte[] colorByte = new byte[] { (byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed() };
+		for (double theta = 0; theta < 2 * Math.PI; theta += step) {
+			int x = (int) (major.length() * Math.cos(theta) + translation.getX());
+			int y = (int) (minor.length() * Math.sin(theta) + translation.getY()); // TODO kinda yoloed, should double
+																					// check
 			m.put(y, x, colorByte);
 		}
-		
-	}
 
+	}
 
 }
