@@ -99,12 +99,8 @@ public class DriveTrain extends Subsystem {
 		rightT2.set(0);
 	}
 
-	public CANTalon getLeftT1() {
-		return leftT1;
-	}
-
-	public CANTalon getRightT1() {
-		return rightT1;
+	public double getEncoder() {
+		return (leftT1.getEncPosition() + rightT1.getEncPosition())/2d;
 	}
 
 }
