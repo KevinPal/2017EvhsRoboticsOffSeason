@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.usfirst.frc.team2854.map.elements.FieldMap;
 import org.usfirst.frc.team2854.map.input.AccelerometerBased;
 import org.usfirst.frc.team2854.map.input.FieldMapDriver;
+import org.usfirst.frc.team2854.robot.commands.Shift;
 import org.usfirst.frc.team2854.robot.commands.ShiftDown;
 import org.usfirst.frc.team2854.robot.commands.ShiftUp;
 import org.usfirst.frc.team2854.robot.commands.TurnToAngle;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
 	private static double startingY = .8;
 	
 	private static Compressor compressor;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -135,17 +137,21 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-	//	compressor = new Compressor(4);		
-	//	compressor.setClosedLoopControl(true);
+		compressor = new Compressor(4);		
+		compressor.setClosedLoopControl(true);
+		
+		//Solenoid s = new Solenoid(6);
+		//s.set(true);
+		
 //		for(int i = 0; i < 8; i++) {
 //			Solenoid s = new Solenoid(i);
-//			s.set(true);
+//			s.set(false);
 //		}
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
 
-	/**
+	/**s
 	 * This function is called periodically during operator control
 	 */
 	@Override
@@ -158,8 +164,9 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putBoolean("Pressure switch (true if low)", compressor.getPressureSwitchValue());
 	
 		
-		OI.buttonA.whenPressed(new TurnToAngle(90));
+		OI.buttonA.whenPressed(new ShiftUp());
 		OI.buttonB.whenPressed(new ShiftDown());
+		OI.rTrigger.whenPressed(new Shift());
 		SmartDashboard.putNumber("Angle", getSensors().getNavX().getAngle());
 
 		Scheduler.getInstance().run();

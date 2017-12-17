@@ -9,11 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftDown extends Command {
+public class Shift extends Command {
 
 	DriveTrain drive;
+	private boolean state = true;
 	
-    public ShiftDown() {
+    public Shift() {
         requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
     }
 
@@ -24,7 +25,13 @@ public class ShiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.shiftDown();
+    	if(state) {
+    		state = !state;
+    		drive.shiftUp();
+    	} else {
+    		state = !state;
+    		drive.shiftDown();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,6 +46,6 @@ public class ShiftDown extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	System.out.println("Shift down is getting inturpeted");
+    	System.out.println("Shift up is being interupted");
     }
 }

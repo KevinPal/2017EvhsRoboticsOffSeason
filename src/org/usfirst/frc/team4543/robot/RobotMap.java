@@ -19,8 +19,8 @@ public class RobotMap {
 	public static int rightTalonID1 = 1;
 	public static int rightTalonID2 = 2;
 	
-	public static int shifterUp = 1;
-	public static int shifterDown = 2;
+	public static int shifterUp = 4;     //     4 2 6
+	public static int shifterDown = 3;   //     3 1 5
 	
 	
 }

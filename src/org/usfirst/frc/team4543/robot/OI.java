@@ -13,6 +13,8 @@ public class OI {
 	public static Joystick joystick = new Joystick(0);
 	public static JoystickButton buttonA = new JoystickButton(joystick, 1);
 	public static JoystickButton buttonB = new JoystickButton(joystick, 2);
+	public static JoystickButton rTrigger = new JoystickButton(joystick, 6);
+
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

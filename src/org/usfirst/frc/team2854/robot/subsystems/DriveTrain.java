@@ -54,6 +54,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void shiftUp() {
+		System.out.println("Shifting up");
 		shifter.set(Value.kForward);
 	}
 	
