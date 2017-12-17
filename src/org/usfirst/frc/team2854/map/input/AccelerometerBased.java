@@ -44,9 +44,7 @@ public class AccelerometerBased implements MapInput {
 		}
 		startTime = System.nanoTime();
 		deltaTime = (startTime - lastTime)/1E9d;
-		SmartDashboard.putNumber("NavX Vel X", sensors.getNavX().getVelocityX());
-		SmartDashboard.putNumber("NavX Vel Y", sensors.getNavX().getVelocityY());
-		SmartDashboard.putNumber("NavX Vel Z", sensors.getNavX().getVelocityZ());
+
 		
 		SmartDashboard.putNumber("NavX Acc X", sensors.getNavX().getRawAccelX());
 		SmartDashboard.putNumber("NavX Acc Y", sensors.getNavX().getRawAccelY());

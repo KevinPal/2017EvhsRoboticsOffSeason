@@ -14,17 +14,18 @@ public class ShiftDown extends Command {
 	DriveTrain drive;
 	
     public ShiftDown() {
-        requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
+        //requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	drive = (DriveTrain) Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN);
+    	drive.shiftDown();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.shiftDown();
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

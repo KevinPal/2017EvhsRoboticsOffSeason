@@ -23,6 +23,8 @@ public class DriveTrain extends Subsystem {
 	private boolean side = false;
 	
 	private DoubleSolenoid shifter;
+	
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());
 	}
@@ -48,9 +50,21 @@ public class DriveTrain extends Subsystem {
 
 	public void drive(double left, double right) {
 		leftT1.set(left);
+		 
 		leftT2.set(left);
 		rightT1.set(right);
 		rightT2.set(right);
+	}
+	
+	public void toggleShift() {
+		if(shifter.get() == Value.kForward) {
+			shifter.set(Value.kReverse);
+		} else if(shifter.get() == Value.kReverse) {
+			shifter.set(Value.kForward);
+		}else {
+			System.out.println("Weird state " + shifter.get().toString() + " defualting to forward");
+			shifter.set(Value.kForward);
+		}
 	}
 	
 	public void shiftUp() {
@@ -60,7 +74,11 @@ public class DriveTrain extends Subsystem {
 	
 	public void shiftDown() {
 		System.out.println("shifting down");
-		shifter.set(Value.kReverse);
+		shifter.set(Value.kReverse);	
+	}
+	
+	public Value getState() {
+		return shifter.get();
 	}
 
 	public void stop() {

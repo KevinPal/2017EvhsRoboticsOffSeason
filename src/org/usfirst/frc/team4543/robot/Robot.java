@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.usfirst.frc.team2854.map.elements.FieldMap;
 import org.usfirst.frc.team2854.map.input.AccelerometerBased;
 import org.usfirst.frc.team2854.map.input.FieldMapDriver;
+import org.usfirst.frc.team2854.map.input.VelocityBased;
 import org.usfirst.frc.team2854.robot.commands.Shift;
 import org.usfirst.frc.team2854.robot.commands.ShiftDown;
 import org.usfirst.frc.team2854.robot.commands.ShiftUp;
@@ -64,7 +65,8 @@ public class Robot extends IterativeRobot {
 		sensors = new SensorBoard();
 		sensors.calibrate((long) 2E9);
 		
-		AccelerometerBased mapInput = new AccelerometerBased();
+		//AccelerometerBased mapInput = new AccelerometerBased();
+		VelocityBased mapInput = new VelocityBased();
 		
 		fm = new FieldMap(fieldWidth, fieldHeight);
 		fm.setRobotPosition(startingX, startingY);
@@ -72,7 +74,7 @@ public class Robot extends IterativeRobot {
 		
 		FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
 
-		chooser.addObject("turn 90", new TurnToAngle(180));
+		chooser.addObject("turn 180", new TurnToAngle(180));
 		SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(new TurnToAngle(180));
 	}
@@ -149,6 +151,11 @@ public class Robot extends IterativeRobot {
 //		}
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		
+		OI.buttonA.whenPressed(new ShiftUp());
+		OI.buttonB.whenPressed(new ShiftDown());
+		OI.rTrigger.whenPressed(new Shift());
 	}
 
 	/**s
@@ -164,10 +171,9 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putBoolean("Pressure switch (true if low)", compressor.getPressureSwitchValue());
 	
 		
-		OI.buttonA.whenPressed(new ShiftUp());
-		OI.buttonB.whenPressed(new ShiftDown());
-		OI.rTrigger.whenPressed(new Shift());
+
 		SmartDashboard.putNumber("Angle", getSensors().getNavX().getAngle());
+		SmartDashboard.putString("Shifter", ((DriveTrain)getSubsystem(SubsystemNames.DRIVE_TRAIN)).getState().toString());
 
 		Scheduler.getInstance().run();
 	}
