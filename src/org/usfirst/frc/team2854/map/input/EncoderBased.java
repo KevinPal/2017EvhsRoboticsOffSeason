@@ -23,8 +23,8 @@ public class EncoderBased implements MapInput {
 	public EncoderBased() {
 		sensors = Robot.getSensors();
 		
-		leftT = ((DriveTrain)(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN))).getLeftT1();
-		rightT = ((DriveTrain)(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN))).getRightT1();
+		//leftT = ((DriveTrain)(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN))).getLeftT1();
+		//rightT = ((DriveTrain)(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN))).getRightT1();
 
 	} 
 	
