@@ -6,6 +6,7 @@ import java.io.ObjectInputStream.GetField;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.usfirst.frc.team2854.map.elements.FieldMap;
+import org.usfirst.frc.team2854.map.math.Matrix;
 import org.usfirst.frc.team2854.map.math.Vector;
 
 import com.ctre.CANTalon;
@@ -54,7 +55,8 @@ public class FieldMapDriver implements Runnable{
 			robotInput.update();
 			//System.out.println("asd " + map.getRobotPosition());
 			Vector pos = map.getRobotPosition();
-			map.setRobotPosition(pos.getX() + robotInput.getDeltaForward(), pos.getY());
+			Vector delta = (new Vector(robotInput.getDeltaForward(), 0).muliply(new Matrix().rotation(robotInput.getRotation())));
+			map.setRobotPosition(pos.add(delta).getX(), pos.add(delta).getY());
 			SmartDashboard.putString("Robot Position", "[" + map.getRobotPosition().toString() + "]");
 			Mat screen = new Mat(sHeight, sWidth, CvType.CV_8UC3);
 			

@@ -1,7 +1,10 @@
 package org.usfirst.frc.team2854.robot.subsystems;
 
 import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
+import org.usfirst.frc.team4543.robot.Config;
+import org.usfirst.frc.team4543.robot.Robot;
 import org.usfirst.frc.team4543.robot.RobotMap;
+import org.usfirst.frc.team4543.robot.SensorBoard;
 
 import com.ctre.CANTalon;
 
@@ -16,15 +19,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
 
-	// Put methods for controlling this subsystem
+	// Put methods for controlling this subsyWstem
 	// here. Call these from Commands.
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
 	private boolean side = false;
-	
+
 	private DoubleSolenoid shifter;
-	
-	
+
+	private boolean automatic = true;
+	private double shiftUp = 2.6, shiftDown = 2;
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());
 	}
@@ -41,42 +46,48 @@ public class DriveTrain extends Subsystem {
 
 		rightT2 = new CANTalon(RobotMap.rightTalonID2);
 		rightT2.setInverted(!side);
-		
 
 		shifter = new DoubleSolenoid(RobotMap.shifterUp, RobotMap.shifterDown);
-
 
 	}
 
 	public void drive(double left, double right) {
+
+		if (automatic) {
+			if (Math.abs(Robot.getSensors().getNavX().getVelocityY()) < shiftDown * Config.driveSpeedMultiplier) {
+				shiftDown();
+			} else if(Math.abs(Robot.getSensors().getNavX().getVelocityY()) > shiftUp * Config.driveSpeedMultiplier){
+				shiftUp();
+			}
+		}
+
 		leftT1.set(left);
-		 
 		leftT2.set(left);
 		rightT1.set(right);
 		rightT2.set(right);
 	}
-	
+
 	public void toggleShift() {
-		if(shifter.get() == Value.kForward) {
+		if (shifter.get() == Value.kForward) {
 			shifter.set(Value.kReverse);
-		} else if(shifter.get() == Value.kReverse) {
+		} else if (shifter.get() == Value.kReverse) {
 			shifter.set(Value.kForward);
-		}else {
+		} else {
 			System.out.println("Weird state " + shifter.get().toString() + " defualting to forward");
 			shifter.set(Value.kForward);
 		}
 	}
-	
+
 	public void shiftUp() {
 		System.out.println("Shifting up");
 		shifter.set(Value.kForward);
 	}
-	
+
 	public void shiftDown() {
 		System.out.println("shifting down");
-		shifter.set(Value.kReverse);	
+		shifter.set(Value.kReverse);
 	}
-	
+
 	public Value getState() {
 		return shifter.get();
 	}
