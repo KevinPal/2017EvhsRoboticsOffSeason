@@ -1,10 +1,6 @@
 package org.usfirst.frc.team2854.map.elements;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc.team2854.map.math.RobotPosition;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FieldMap {
 	private RobotPosition rPos;
@@ -47,11 +43,13 @@ public class FieldMap {
 				? ("Warning: The targetPosition is out of the field boundaries"
 						+ ((force) ? ", \n\tProceeding anyways\n" : ""))
 				: "");
-		if ((!f.isWithinBounds(check) && force) || f.isWithinBounds(check)) {
+
+		if (!f.isWithinBounds(check) && !force) {
+			return false;
+		} else {
 			targetPos = check;
 			return true;
 		}
-		return false;
 	}
 
 	public void setTargetAngle(double angle) {
@@ -69,6 +67,5 @@ public class FieldMap {
 	public void setField(Field f) {
 		this.f = f;
 	}
-
 
 }

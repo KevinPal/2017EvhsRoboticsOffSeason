@@ -49,8 +49,7 @@ public class EncoderBased implements MapInputCartesian {
 
 	@Override
 	public double getPosError() {
-		// TODO Do I account slipping in this?`
-		return 0;
+		return -1;
 	}
 
 	@Override
