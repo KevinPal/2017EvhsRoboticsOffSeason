@@ -60,12 +60,6 @@ public class Field extends Rectangle2D implements FieldShape {
 	}
 
 	@Override
-	public Rectangle2D createIntersection(Rectangle2D arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Rectangle2D createUnion(Rectangle2D arg0) {
 		// TODO Auto-generated method stub
 		return null;
@@ -98,21 +92,25 @@ public class Field extends Rectangle2D implements FieldShape {
 		return false;
 	}
 
-
-
 	@Override
 	public void draw(Mat m, Vector translation, Color c) {
-		byte[] colorByte = new byte[] {(byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed()};
-		for(int y = 0; y < getHeight(); y++) {
-			for(int x = 0; x < getWidth(); x++) {
-				if(x==0||y==0||x==getWidth()-1||y==getHeight()-1) {//TODO make more effecient
-					m.put((int)(y+getY()+translation.getY()), (int)( x+getX()+translation.getX()), colorByte);
+		byte[] colorByte = new byte[] { (byte) c.getBlue(), (byte) c.getGreen(), (byte) c.getRed() };
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
+				if (x == 0 || y == 0 || x == getWidth() - 1 || y == getHeight() - 1) {// TODO make more effecient
+					m.put((int) (y + getY() + translation.getY()), (int) (x + getX() + translation.getX()), colorByte);
 				}
 			}
 		}
-		for(FieldShape shape:innerFieldPieces) {
+		for (FieldShape shape : innerFieldPieces) {
 			shape.draw(m, new Vector(getX(), getY()), c);
 		}
-		
+
+	}
+
+	@Override
+	public Rectangle2D createIntersection(Rectangle2D arg0) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

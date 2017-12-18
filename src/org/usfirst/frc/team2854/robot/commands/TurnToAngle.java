@@ -14,50 +14,47 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnToAngle extends Command {
 
 	DriveTrain drive;
-	private double targetAngle, startingAngle, lastAngle, totalAngle, angleDiff;
+	private double targetAngle, startingAngle, currentAngle, angleDiff, minPower, maxPower;
 	private SensorBoard sensors;
-	
-    public TurnToAngle(double angle) {
-        requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
-        this.targetAngle = angle;
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	
-    	drive = (DriveTrain) Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN);
-    	sensors = Robot.getSensors();
-    	startingAngle = sensors.getNavX().getAngle();
-    	lastAngle = sensors.getNavX().getAngle();
-    	totalAngle = 0;
-    }
+	public TurnToAngle(double targetAngle, double minPower, double maxPower) {
+		requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
+		this.targetAngle = targetAngle;
+		this.minPower = minPower;
+		this.maxPower = maxPower;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	startingAngle = sensors.getNavX().getAngle();
-    	totalAngle += (startingAngle - lastAngle);
-    	drive.drive(-.2, .2);
-    	angleDiff = totalAngle - targetAngle;
-    	
-    	SmartDashboard.putNumber("Total Angle", totalAngle);
-    	SmartDashboard.putNumber("TargetAngle", targetAngle);
-    	SmartDashboard.putNumber("AngleDiff", angleDiff);
+	protected void initialize() {
 
-    	lastAngle = startingAngle;
-    }
+		drive = (DriveTrain) Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN);
+		sensors = Robot.getSensors();
+		startingAngle = sensors.getNavX().getAngle();
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return Math.abs(angleDiff)%360 < .5f;
-    }
+	protected void execute() {
+		currentAngle = sensors.getNavX().getAngle();
+		angleDiff = targetAngle - currentAngle;
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	System.out.println("Ending");
-    }
+		SmartDashboard.putNumber("TargetAngle", targetAngle);
+		SmartDashboard.putNumber("CurrentAngle", currentAngle);
+		SmartDashboard.putNumber("StartingAngle", startingAngle);
+		SmartDashboard.putNumber("AngleDiff", angleDiff);
+		double b = (maxPower - minPower) / 180 / 180;
+		drive.drive(-((angleDiff > 0 ? 1 : -1) * (Math.pow(angleDiff, 2) * b + minPower)),
+				(angleDiff > 0 ? 1 : -1) * (Math.pow(angleDiff, 2) * b + minPower));
+		// TODO I guess traditionally, we'd want to use an exponential function, but I
+		// didn't feel like working with odd functions, Maybe e^(x^2) would work better
+		// idk
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	protected boolean isFinished() {
+		return Math.abs(angleDiff) % 360 < .5f;
+	}
+
+	protected void end() {
+		System.out.println("Ending");
+	}
+
+	protected void interrupted() {
+	}
 }

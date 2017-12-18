@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2854.map.math;
 
-import java.awt.geom.Point2D;
-
 public class RobotPosition extends Vector {
 	private double theta;
 
@@ -26,7 +24,7 @@ public class RobotPosition extends Vector {
 	public void setTheta(double theta) {
 		this.theta = theta;
 	}
-	
+
 	public void rotate(double theta) {
 		this.theta += theta;
 	}

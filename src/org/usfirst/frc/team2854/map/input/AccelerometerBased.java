@@ -76,4 +76,19 @@ public class AccelerometerBased implements MapInput {
 		lastTime = System.nanoTime();
 	}
 
+	@Override
+	public double getDeltaX() {
+		return getDeltaForward() * Math.cos(getRotation());
+	}
+
+	@Override
+	public double getDeltaY() {
+		return getDeltaForward() * Math.sin(getRotation());
+	}
+
+	@Override
+	public double getDeltaRotation() {
+		return Math.atan(getDeltaY() / getDeltaX());
+	}
+
 }

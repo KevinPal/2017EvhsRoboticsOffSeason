@@ -12,35 +12,34 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Shift extends Command {
 
 	DriveTrain drive;
-	private boolean state = true;
-	
-    public Shift() {
-        requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	drive = (DriveTrain) Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN);
-    	drive.toggleShift();
-    }
+	public Shift() {
+		requires(Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN));
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		drive = (DriveTrain) Robot.getSubsystem(SubsystemNames.DRIVE_TRAIN);
+		drive.toggleShift();
+	}
 
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	System.out.println("Shift up is being interupted");
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		System.out.println("Shift is being interupted");
+	}
 }

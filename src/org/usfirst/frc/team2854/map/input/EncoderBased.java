@@ -5,12 +5,11 @@ import org.usfirst.frc.team2854.robot.SensorBoard;
 import org.usfirst.frc.team2854.robot.SubsystemNames;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
-public class EncoderBased implements MapInputCartesian {
+public class EncoderBased implements MapInput {
 	private double deltaX;
 	private double deltaY;
 	private double deltaTheta;
-	private double theta;// TODO Idk if this class should be keeping track of this. I just put it here to
-							// put something for the MapInput Interface
+	private double theta;
 
 	private SensorBoard s;
 	private double width;
@@ -44,13 +43,12 @@ public class EncoderBased implements MapInputCartesian {
 
 	@Override
 	public double getDeltaRotation() {
-		return deltaTheta;
+		return deltaTheta = Math.atan(deltaY / deltaX);
 	}
 
 	@Override
 	public double getPosError() {
-		// TODO Do I account slipping in this?`
-		return 0;
+		return -1;
 	}
 
 	@Override
