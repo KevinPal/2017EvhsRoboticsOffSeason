@@ -1,8 +1,12 @@
 package org.usfirst.frc.team2854.robot.subsystems;
+
 import org.usfirst.frc.team2854.robot.RobotMap;
+import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,35 +18,67 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 
 	private CANTalon leftT1, leftT2, rightT1, rightT2;
-	private int leftT1Zero, leftT2Zero, rightT1Zero, rightT2Zero;
-	private final double width;
+	private double zeroLeft, zeroRight, width;
+	private boolean side = false;
+
+	private DoubleSolenoid shifter;
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new JoystickDrive());
 	}
 
 	public DriveTrain() {
 		leftT1 = new CANTalon(RobotMap.leftTalonID1);
-		leftT1.setInverted(true);
+		leftT1.setInverted(side);
 
 		leftT2 = new CANTalon(RobotMap.leftTalonID2);
-		leftT2.setInverted(true);
+		leftT2.setInverted(side);
 
 		rightT1 = new CANTalon(RobotMap.rightTalonID1);
-		rightT1.setInverted(false);
+		rightT1.setInverted(!side);
 
 		rightT2 = new CANTalon(RobotMap.rightTalonID2);
-		rightT2.setInverted(false);
+		rightT2.setInverted(!side);
 
-		width = 100;
-		// TODO put dimensions of the drivetrain in here
+		shifter = new DoubleSolenoid(RobotMap.shifterUp, RobotMap.shifterDown);
+
+		zeroRight = 0;
+		zeroLeft = 0;
+		width = 10;
 
 	}
 
 	public void drive(double left, double right) {
 		leftT1.set(left);
+
 		leftT2.set(left);
 		rightT1.set(right);
 		rightT2.set(right);
+	}
+
+	public void toggleShift() {
+		if (shifter.get() == Value.kForward) {
+			shifter.set(Value.kReverse);
+		} else if (shifter.get() == Value.kReverse) {
+			shifter.set(Value.kForward);
+		} else {
+			System.out.println("Weird state " + shifter.get().toString() + " defualting to forward");
+			shifter.set(Value.kForward);
+		}
+	}
+
+	public void shiftUp() {
+		System.out.println("Shifting up");
+		shifter.set(Value.kForward);
+	}
+
+	public void shiftDown() {
+		System.out.println("shifting down");
+		shifter.set(Value.kReverse);
+	}
+
+	public Value getState() {
+		return shifter.get();
 	}
 
 	public void stop() {
@@ -52,20 +88,18 @@ public class DriveTrain extends Subsystem {
 		rightT2.set(0);
 	}
 
+	public double getLeftEncoder() {
+		return leftT1.getEncPosition() - zeroLeft;
+	}
+
+	public double getRightEncoder() {
+		return rightT1.getEncPosition() - zeroRight;
+	}
+
 	public void zeroEncoders() {
-		leftT1Zero = leftT1.getEncPosition();
-		leftT2Zero = leftT2.getEncPosition();
-		rightT1Zero = rightT1.getEncPosition();
-		rightT2Zero = rightT2.getEncPosition();
-	}
+		zeroLeft = getLeftEncoder();
+		zeroRight = getRightEncoder();
 
-	public int getLeftEncoder() {
-		return (int) Math.round(((leftT1.getEncPosition() - leftT1Zero) + (leftT2.getEncPosition() - leftT2Zero)) / 2);
-	}
-
-	public int getRightEncoder() {
-		return (int) Math
-				.round(((rightT1.getEncPosition() - rightT1Zero) + (rightT2.getEncPosition() - rightT2Zero)) / 2);
 	}
 
 	public double getWidth() {
