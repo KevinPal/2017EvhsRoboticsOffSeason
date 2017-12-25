@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		leftT1 = new CANTalon(RobotMap.leftTalonID1);
 		leftT1.setInverted(side);
-
+		
 		leftT2 = new CANTalon(RobotMap.leftTalonID2);
 		leftT2.setInverted(side);
 
