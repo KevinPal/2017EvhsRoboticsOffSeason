@@ -20,6 +20,8 @@ public class RobotData implements Serializable {
 	private int width, height;
 	private int type;
 
+	private long timeStamp;
+	
 	public RobotData() {
 		this(new Mat());
 	}
@@ -74,6 +76,18 @@ public class RobotData implements Serializable {
 	@Override
 	public String toString() {
 		return "RobotData [image=" + image.dump() + "]";
+	}
+
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
+	public Mat getImage() {
+		return image;
 	}
 
 }

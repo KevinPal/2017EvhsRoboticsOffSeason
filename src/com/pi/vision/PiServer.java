@@ -7,6 +7,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 
+import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -45,24 +46,31 @@ public class PiServer extends Thread{
 	
 	@Override
 	public void run() {
-		NetworkTable.setClientMode();
-		NetworkTable.setIPAddress("10.45.43.2"); //TODO GET robot ip
-		NetworkTable table = NetworkTable.getTable("visionTable");
-		NetworkTable status = NetworkTable.getTable("robotStatus");
-		table.putString("testKey", "testValue");
+
+		PiConnection connection = null;
 		
-		//while(!status.getBoolean("isRobotInit") || !status.getBoolean("visionInit")) { //wait for robot init
-		//	Thread.sleep(1000);
-		//}
+		try {
+			connection = new PiConnection("10.45.43.101", 27); //randomly using port 27 might be bad idea
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} 
+		
+		new Thread(connection).start();
 		
 		
 		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture();
 		//UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture();
 		
-		
+		CvSink sink = new CvSink("cam");
+		sink.setSource(cam1);
 		
 		while(true) { 
 			//StereoSGBM s = StereoSGBM.create(minDisparity, numDisparities, blockSize, P1, P2, disp12MaxDiff, preFilterCap, uniquenessRatio, speckleWindowSize, speckleRange, mode) //StereoSGBM apprenety gives better quality @ cost of speed (vs StereoBM)
+			Mat m = new Mat();
+			sink.grabFrame(m);
+			RobotData data = new RobotData(m);
+					
+			connection.writeData(data);
 			
 		}
 		
