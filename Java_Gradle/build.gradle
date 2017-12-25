@@ -19,10 +19,10 @@ ext.buildType = "arm-raspbian"
 //ext.buildType = "armhf"
 
 // Change the line below if you change the name of your main Java class
-mainClassName = 'PiServer'
+mainClassName = 'com.pi.vision.PiServer'
 // Change the line below to change the name of the output jar
 def projectName = 'PiCameraVision'
-
+sourceSets.main.java.srcDirs = ['src']
 // Shouldn't need to change anything below this point
 apply from: 'dependencies.gradle'
 
@@ -36,6 +36,7 @@ repositories {
 dependencies {
   compile ntcoreDep()
   compile cscoreDep()
+  compile fileTree(dir: 'lib', include: ['*'])
   compile 'org.opencv:opencv-java:3.1.0'
 }
 
@@ -129,3 +130,5 @@ run.dependsOn unzipOpenCv
 clean {
     delete outputDirectory
 }
+
+
