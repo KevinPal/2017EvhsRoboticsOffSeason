@@ -32,6 +32,7 @@ public class RioServer implements Runnable{
 		Socket s = null;
 		
 		try {
+			System.out.println("Waiting for a connection");
 			s = serverSocket.accept();
 			out = new PrintWriter(s.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(s.getInputStream()));

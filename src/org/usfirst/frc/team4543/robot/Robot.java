@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(new TurnToAngle(180));
 
-		RioServer server = new RioServer(27);
+		RioServer server = new RioServer(5800);
 		new Thread(server).start();
 		new Thread(new Runnable() {
 			CvSource stream = CameraServer.getInstance().putVideo("piVideo", 640, 480);
