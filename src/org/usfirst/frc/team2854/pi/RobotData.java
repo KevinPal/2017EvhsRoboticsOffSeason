@@ -13,7 +13,7 @@ public class RobotData implements Serializable {
 	 * Version 1 (Please increment whenever this class's instance variables change
 	 * ty
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	private transient Mat image;
 	private double[] imgData;

@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		fm.setRobotPosition(startingX, startingY);
 		fm.setTargetPosition(startingX, startingY, false);
 
-		FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
+		//FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
 
 		chooser.addObject("turn 180", new TurnToAngle(180));
 		SmartDashboard.putData("Auto mode", chooser);
