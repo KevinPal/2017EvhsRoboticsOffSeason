@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		fm.setRobotPosition(startingX, startingY);
 		fm.setTargetPosition(startingX, startingY, false);
 
-		//FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
+		// FieldMapDriver map = new FieldMapDriver(fm, 250, 250, mapInput);
 
 		chooser.addObject("turn 180", new TurnToAngle(180));
 		SmartDashboard.putData("Auto mode", chooser);
@@ -89,10 +89,12 @@ public class Robot extends IterativeRobot {
 			CvSource stream = CameraServer.getInstance().putVideo("piVideo", 640, 480);
 
 			public void run() {
-				Mat m = server.getData().getImage();
-				Imgproc.putText(m, "delay: " + (System.nanoTime() - server.getData().getTimeStamp()) / 1E9d,
-						new Point(10, 50), Core.FONT_HERSHEY_PLAIN, 25, new Scalar(0, 255, 0));
-				stream.putFrame(m);
+				if (server.isReady()) {
+					Mat m = server.getData().getImage();
+					Imgproc.putText(m, "delay: " + (System.nanoTime() - server.getData().getTimeStamp()) / 1E9d,
+							new Point(10, 50), Core.FONT_HERSHEY_PLAIN, 25, new Scalar(0, 255, 0));
+					stream.putFrame(m);
+				}
 
 			}
 		}).start();

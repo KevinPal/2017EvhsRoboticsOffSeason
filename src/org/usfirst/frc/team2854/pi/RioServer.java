@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+
 public class RioServer implements Runnable{
 
 	private ServerSocket serverSocket;
@@ -16,8 +17,12 @@ public class RioServer implements Runnable{
 	
 	private RobotData data;
 	
+	private boolean isReady = false;
+	
+	private int port;
+	
 	public RioServer(int port) {
-		
+		this.port = port;
 		try {
 			serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
@@ -41,13 +46,27 @@ public class RioServer implements Runnable{
 			e.printStackTrace();
 		}
 		System.out.println("Connected to " + s.getInetAddress().toString());
-		out.write(("time:"+System.nanoTime()).toCharArray());
-		
+		isReady = true;
+		out.println(("time:"+System.nanoTime()).toCharArray());
+	
 		
 		while(true) {
+			if(!s.isConnected()) {
+				try {
+					s.close();
+					System.out.println("Lost connection to socket, restarting server");
+					new Thread(new RioServer(port)).start();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			String inputS = "";
 			try {
 				inputS = in.readLine();
+				if(!inputS.equals("")) {
+					System.out.println("Read line [" + inputS + "]");
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,5 +89,9 @@ public class RioServer implements Runnable{
 
 	public RobotData getData() {
 		return data;
+	}
+
+	public boolean isReady() {
+		return isReady;
 	}
 }

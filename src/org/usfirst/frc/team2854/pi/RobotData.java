@@ -10,10 +10,9 @@ import org.opencv.core.Mat;
 public class RobotData implements Serializable {
 
 	/**
-	 * Version 1 (Please increment whenever this class's instance variables change
-	 * ty
+	 * 
 	 */
-	private static final long serialVersionUID = 2L;
+
 
 	private transient Mat image;
 	private double[] imgData;
@@ -39,7 +38,7 @@ public class RobotData implements Serializable {
 		int counter = 0;
 		for (int i = 0; i < image.rows(); i++) {
 			for (int j = 0; j < image.cols(); j++) {
-				double[] data = image.get(j, i);
+				double[] data = image.get(i, j);
 				for (double d : data) {
 					imgData[counter++] = d;
 				}
@@ -60,13 +59,13 @@ public class RobotData implements Serializable {
 		if (channels == 1) {
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					image.put(j, i, imgData[i * width + j]);
+					image.put(i, j, imgData[i * width + j]);
 				}
 			}
 		} else {
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					image.put(j, i, imgData[3 * (i * width + j) + 0], imgData[3 * (i * width + j) + 1],
+					image.put(i, j, imgData[3 * (i * width + j) + 0], imgData[3 * (i * width + j) + 1],
 							imgData[3 * (i * width + j) + 2]);
 				}
 			}
