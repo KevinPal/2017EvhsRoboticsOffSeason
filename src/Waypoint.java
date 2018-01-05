@@ -11,6 +11,8 @@ import javax.swing.JButton;
 
 public class Waypoint extends JButton implements MouseListener, MouseMotionListener {
 
+	
+
 	/**
 	 * 
 	 */
@@ -21,7 +23,7 @@ public class Waypoint extends JButton implements MouseListener, MouseMotionListe
 	private String command = "";
 	private boolean isParallel = false;
 
-	private transient static int counter = 0;
+	private static int counter = 0;
 	private int id;
 
 	public Waypoint(int x, int y) {
