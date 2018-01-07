@@ -5,7 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.function.Supplier;
 
+import com.team2854.builtincommands.DriveCommand;
+import com.team2854.builtincommands.DriveDistance;
+import com.team2854.builtincommands.TurnCommand;
+import com.team2854.builtincommands.TurnToAngle;
 import com.team2854.fieldAuto.FieldAuto;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,9 +45,12 @@ public class MapBasedAuto {
 		
 	}
 	
-	public Command generateAuto() {
-		return null;
-		
+	public Command generateAuto(Driveable drive, Supplier<Double> gyro, Supplier<Double> encoder) {
+		return new AutoCommand(new TurnToAngle(drive, 0, gyro), new DriveDistance(drive, 0, encoder), field);
+	}
+
+	public Command generateAuto(TurnCommand turnCmd, DriveCommand driveCmd) {
+		return new AutoCommand(turnCmd, driveCmd, field);
 	}
 	
 }

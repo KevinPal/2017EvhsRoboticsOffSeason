@@ -57,6 +57,7 @@ public class AutoCommand extends CommandGroup {
 			double deltaAngle = targetAngle - currentAngle;
 			turnCommand.setAngle(deltaAngle);
 			addSequential(turnCommand);
+			currentAngle = targetAngle;
 			double targetDistance = Math.sqrt(Math.pow(point.getY()-nextPoint.getY(), 2) + Math.pow(point.getX()-nextPoint.getX(), 2));
 			driveCommand.setDistance(targetDistance);
 			addSequential(driveCommand);
