@@ -10,12 +10,7 @@ public class LeftRightVelocity {
 
 	public LeftRightVelocity(RobotPosition rp, Vector[] v) {
 		targetVector = Vector.sum(v);
-		currentVector = new Vector(rp.getSpeed() * Math.cos(rp.getTheta()), rp.getSpeed() * Math.sin(rp.getTheta()));// FIXME
-																														// get
-																														// current
-																														// speed
-																														// or
-																														// velocity
+		currentVector = new Vector(rp.getSpeed() * Math.cos(rp.getTheta()), rp.getSpeed() * Math.sin(rp.getTheta()));//FIXME
 	}
 
 	private double velocityDifference(Vector targetVector, Vector currentVector) {
