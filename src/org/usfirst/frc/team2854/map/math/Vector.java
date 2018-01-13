@@ -38,10 +38,10 @@ public class Vector {
 		return new Vector(x + r, y + r);
 	}
 
-	public static Vector sum(Vector[] v) {
+	public static Vector sum(Vector... v) {
 		Vector out = new Vector(0, 0);
-		for (int i = 0; i < v.length; i++) {
-			out = out.add(v[i]);
+		for (Vector a : v) {
+			out = out.add(a);
 		}
 		return out;
 	}

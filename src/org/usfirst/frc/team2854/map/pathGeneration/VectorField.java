@@ -12,10 +12,11 @@ public class VectorField implements Function<RobotPosition, Vector> {
 	 *            RobotPosition
 	 * @return a vector that corresponds to the RobotPosition rp
 	 */
+	BoundaryRepulsionVectorField brvf = new BoundaryRepulsionVectorField(Robot.fm.getField(), 1);
+
 	@Override
-	BoundaryRepulsionVectorField brvf = new BoundaryRepulsionVectorField(Robot.f,1);
 	public Vector apply(RobotPosition rp) {
-		return	Vector.sum();
+		return Vector.sum(brvf.apply(rp));
 	}
 
 }

@@ -3,22 +3,23 @@ package org.usfirst.frc.team2854.map.pathGeneration;
 import java.util.function.Function;
 
 import org.usfirst.frc.team2854.map.elements.Field;
+import org.usfirst.frc.team2854.map.elements.FieldMap;
 import org.usfirst.frc.team2854.map.math.RobotPosition;
 import org.usfirst.frc.team2854.map.math.Vector;
 
 public class BoundaryRepulsionVectorField implements Function<RobotPosition, Vector> {
-	private Field f;
+	private Field fm;
 	private double constant;
 	private double degree;
 
-	public BoundaryRepulsionVectorField(Field f, double constant) {
-		this.f = f;
+	public BoundaryRepulsionVectorField(Field fm, double constant) {
+		this.fm = fm;
 		this.constant = constant;
 		degree = 2;
 	}
 
-	public BoundaryRepulsionVectorField(Field f, double constant, double degree) {
-		this.f = f;
+	public BoundaryRepulsionVectorField(Field fm, double constant, double degree) {
+		this.fm = fm;
 		this.constant = constant;
 		this.degree = degree;
 	}
@@ -27,14 +28,14 @@ public class BoundaryRepulsionVectorField implements Function<RobotPosition, Vec
 		return Math.pow(r, -degree) * constant;
 	}
 
-	public Vector horizontalVector(RobotPosition rp) {
+	private Vector horizontalVector(RobotPosition rp) {
 		return (new Vector(1, 0)).multiply(getMagnitude(rp.getX()))
-				.add(new Vector(-1, 0).multiply(getMagnitude(f.getWidth() - rp.getX())));
+				.add(new Vector(-1, 0).multiply(getMagnitude(fm.getWidth() - rp.getX())));
 	}
 
 	private Vector verticalVector(RobotPosition rp) {
 		return (new Vector(0, 1)).multiply(getMagnitude(rp.getY()))
-				.add(new Vector(0, -1).multiply(getMagnitude(f.getHeight() - rp.getY())));
+				.add(new Vector(0, -1).multiply(getMagnitude(fm.getHeight() - rp.getY())));
 	}
 
 	@Override
