@@ -2,7 +2,7 @@ package org.usfirst.frc.team2854.robot;
 
 import org.usfirst.frc.team2854.map.input.DualSensor;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -15,21 +15,34 @@ public class SensorBoard {
 	private AHRS navX;
 	private ADXRS450_Gyro spiGyro;
 	private BuiltInAccelerometer builtInacc;
-	private CANTalon l1;
-	private CANTalon l2;
-	private CANTalon r1;
-	private CANTalon r2;
+	private TalonSRX l1, l2, r1, r2;
 	private double zeroLeft;
 	private double zeroRight;
 	private DualSensor gyro;
 	private DualSensor forwardAccel;
 
 	public SensorBoard() {
-		navX = new AHRS(SerialPort.Port.kMXP);
+		try {
+			navX = new AHRS(SerialPort.Port.kMXP);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		System.out.println("--------------" + navX.isConnected() + "----------------");
-		spiGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
-		builtInacc = new BuiltInAccelerometer();
-		gyro = new DualSensor("Gyro");
+		try {
+			spiGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			builtInacc = new BuiltInAccelerometer();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			gyro = new DualSensor("Gyro");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		forwardAccel = new DualSensor("Forward Acceleration");
 	}
 
@@ -68,11 +81,11 @@ public class SensorBoard {
 	}
 
 	public double getLeftEncoder() {
-		return (l1.getEncPosition() + l2.getEncPosition()) / 2 - zeroLeft;
+		return (l1.getSelectedSensorPosition(0) + l2.getSelectedSensorPosition(0)) / 2 - zeroLeft;
 	}
 
 	public double getRightEncoder() {
-		return (r1.getEncPosition() + r2.getEncPosition()) / 2 - zeroRight;
+		return (r1.getSelectedSensorPosition(0) + r2.getSelectedSensorPosition(0)) / 2 - zeroRight;
 	}
 
 	public void zeroEncoders() {

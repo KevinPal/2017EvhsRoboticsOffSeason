@@ -4,6 +4,8 @@ import org.usfirst.frc.team2854.robot.RobotMap;
 import org.usfirst.frc.team2854.robot.commands.JoystickDrive;
 
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -17,7 +19,7 @@ public class DriveTrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	private CANTalon leftT1, leftT2, rightT1, rightT2;
+	private TalonSRX leftT1, leftT2, rightT1, rightT2;
 	private double zeroLeft, zeroRight, width;
 	private boolean side = false;
 
@@ -28,16 +30,16 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public DriveTrain() {
-		leftT1 = new CANTalon(RobotMap.leftTalonID1);
+		leftT1 = new TalonSRX(RobotMap.leftTalonID1);
 		leftT1.setInverted(side);
 
-		leftT2 = new CANTalon(RobotMap.leftTalonID2);
+		leftT2 = new TalonSRX(RobotMap.leftTalonID2);
 		leftT2.setInverted(side);
 
-		rightT1 = new CANTalon(RobotMap.rightTalonID1);
+		rightT1 = new TalonSRX(RobotMap.rightTalonID1);
 		rightT1.setInverted(!side);
 
-		rightT2 = new CANTalon(RobotMap.rightTalonID2);
+		rightT2 = new TalonSRX(RobotMap.rightTalonID2);
 		rightT2.setInverted(!side);
 
 		shifter = new DoubleSolenoid(RobotMap.shifterUp, RobotMap.shifterDown);
@@ -49,11 +51,17 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		leftT1.set(left);
+		leftT1.set(ControlMode.PercentOutput, left);
+		leftT2.set(ControlMode.PercentOutput, left);
+		rightT1.set(ControlMode.PercentOutput, right);
+		rightT2.set(ControlMode.PercentOutput, right);
+	}
 
-		leftT2.set(left);
-		rightT1.set(right);
-		rightT2.set(right);
+	public void drive(ControlMode cm, double left, double right) {
+		leftT1.set(cm, left);
+		leftT2.set(cm, left);
+		rightT2.set(cm, right);
+		rightT1.set(cm, right);
 	}
 
 	public void toggleShift() {
@@ -82,18 +90,18 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void stop() {
-		leftT1.set(0);
-		leftT2.set(0);
-		rightT1.set(0);
-		rightT2.set(0);
+		leftT1.set(ControlMode.PercentOutput, 0.0);
+		leftT2.set(ControlMode.PercentOutput, 0.0);
+		rightT1.set(ControlMode.PercentOutput, 0.0);
+		rightT2.set(ControlMode.PercentOutput, 0.0);
 	}
 
 	public double getLeftEncoder() {
-		return leftT1.getEncPosition() - zeroLeft;
+		return leftT2.getSelectedSensorPosition(0) - zeroLeft;
 	}
 
 	public double getRightEncoder() {
-		return rightT1.getEncPosition() - zeroRight;
+		return rightT2.getSelectedSensorPosition(0) - zeroRight;
 	}
 
 	public void zeroEncoders() {
