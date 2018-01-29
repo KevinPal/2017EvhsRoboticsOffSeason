@@ -45,7 +45,7 @@ public class LidarReader implements Runnable {
 			for (Packet p : ps.getArrayListPacket()) {
 				for (int j = 0; j < 4; j++) {
 					try {
-						distances[p.getDegree() + j] = p.getDataPointArray()[j].getDistance();
+						distances[p.getDegree() + j] = p.getDataPointArray()[j].getDistance(true);
 					} catch (Exception e) {
 						System.out.println("wut...");
 					}
